@@ -7,8 +7,12 @@ license = "MIT"
 readme = "README.md"
 homepage = 'https://github.com/t-charura/yt-quick-insights'
 
+
 [tool.poetry.dependencies]
 python = "^3.11"
+langchain-community = "^0.2.12"
+youtube-transcript-api = "^0.6.2"
+pytube = "^15.0.0"
 
 
 [tool.poetry.group.dev.dependencies]
