@@ -1,0 +1,17 @@
+prompt: |
+  The following is a YouTube transcript from a video called "{video_title}".
+
+  *** Your task: *** 
+  {task}
+
+  *** Information about the Transcript: ***
+  Keep in mind that this is an automatically generated transcript. 
+  The transcript does not have any punctuation and transcription errors are possible.
+
+  *** Video Background Information: *** 
+  {background_information}
+
+  -----------
+
+  *** YouTube Video Transcript: ***
+  {youtube_transcript}

@@ -1,0 +1,13 @@
+basic: |
+  Summarize and extract the key aspects of the video transcript.
+  Create structured bullet points and avoid repetition.
+  If there are any resources mentioned in the transcript, list them at the end of the summary.
+
+action_steps: |
+  Please extract all action steps and recommendations made in the transcript.
+  List them in bullet points with a short description of why they are necessary and important to do.  
+  Create structured bullet points and avoid repetition.
+  If there are any resources mentioned in the transcript, list them at the end of the summary.
+
+short: |
+  Summarize the main aspects of the transcript in 3-6 bullet points depending on the length of the transcript.
