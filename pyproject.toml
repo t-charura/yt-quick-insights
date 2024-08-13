@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "yt-quick-insights"
+version = "0.1.0"
+description = ""
+authors = ["Tendai <tendai.charura@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+homepage = 'https://github.com/t-charura/yt-quick-insights'
+
+[tool.poetry.dependencies]
+python = "^3.11"
+
+
+[tool.poetry.group.dev.dependencies]
+black = "^24.8.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
