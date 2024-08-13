@@ -10,12 +10,15 @@ class YoutubeTranscript:
     of a YouTube video given its URL, and clean the text for further processing.
     """
 
-    def download_from_url(self, video_url: str) -> Tuple[str, str]:
+    def download_from_url(
+        self, video_url: str, video_language: str | list[str]
+    ) -> Tuple[str, str]:
         """
         Download the transcript and title of a YouTube video, based on the URL.
 
         Args:
             video_url: The URL of the YouTube video. Example: "https://www.youtube.com/watch?v=VIDEO_ID"
+            video_language: The language of the transcript. Example: "en" or ["en", "de"]
 
         Returns:
             The title and transcript of the YouTube video.
@@ -28,7 +31,7 @@ class YoutubeTranscript:
             # Try loading the transcript from the YouTube URL - not all videos have transcripts
             loader = YoutubeLoader.from_youtube_url(
                 youtube_url=video_url,
-                language=["en", "de", "es", "fr"],
+                language=video_language,
                 add_video_info=True,
             )
             yt_document = loader.load()[0]
@@ -62,11 +65,3 @@ class YoutubeTranscript:
         cleaned = re.sub(r"(\xa0|\n|\[Music])", " ", text)
         # Replace multiple whitespaces with single whitespace
         return re.sub(r"\s+", " ", cleaned)
-
-
-if __name__ == "__main__":
-    niklas = "https://www.youtube.com/watch?v=Ihqk33AvllU"
-
-    title, transcript = YoutubeTranscript().download_from_url(video_url=niklas)
-    print(title)
-    print(transcript)
