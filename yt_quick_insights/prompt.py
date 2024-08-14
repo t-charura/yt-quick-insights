@@ -2,6 +2,7 @@ from pathlib import Path
 
 from langchain_core.prompt_values import PromptValue
 from langchain_core.prompts import PromptTemplate
+from rich import print
 
 from yt_quick_insights import YoutubeTranscript
 from yt_quick_insights import utils
@@ -32,7 +33,7 @@ class Prompt:
         self.title, self.transcript = YoutubeTranscript().download_from_url(
             video_url=video_url, video_language=video_language
         )
-        self.task = utils.load_yaml_file("task_details.yml").get(task)
+        self.task = utils.tasks.get(task)
         self.template = utils.load_yaml_file("prompt.yml").get("prompt")
         self.background_information = background_information
 
