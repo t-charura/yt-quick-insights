@@ -6,6 +6,7 @@ from rich import print
 
 from yt_quick_insights import YoutubeTranscript
 from yt_quick_insights import utils
+from yt_quick_insights.task import tasks
 
 
 class Prompt:
@@ -33,7 +34,7 @@ class Prompt:
         self.title, self.transcript = YoutubeTranscript().download_from_url(
             video_url=video_url, video_language=video_language
         )
-        self.task = utils.tasks.get(task)
+        self.task = tasks.get(task)
         self.template = utils.load_yaml_file("prompt.yml").get("prompt")
         self.background_information = background_information
 
