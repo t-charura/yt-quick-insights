@@ -1,4 +1,4 @@
-basic: |
+default: |
   Summarize and extract the key aspects of the video transcript.
   Create structured bullet points and avoid repetition.
   If there are any resources mentioned in the transcript, list them at the end of the summary.
