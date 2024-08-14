@@ -1,4 +1,5 @@
 import re
+from enum import Enum
 from pathlib import Path
 
 import yaml
@@ -63,3 +64,10 @@ def combine_default_and_user_task_details(file_name: str = "task_details.yml") -
 
 
 tasks = combine_default_and_user_task_details()
+
+
+def create_task_details_enum():
+    return Enum("TaskDetails", {key: key for key in tasks.keys()}, type=str)
+
+
+TaskDetails = create_task_details_enum()
