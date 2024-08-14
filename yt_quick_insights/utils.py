@@ -55,9 +55,11 @@ def combine_default_and_user_task_details(file_name: str = "task_details.yml") -
     default_task_details = load_yaml_file(file_name)
     try:
         user_task_details = load_yaml_file(file_name, user_yaml=True)
-        return {**default_task_details, **user_task_details}
+        combined_dicts = {**default_task_details, **user_task_details}
     except FileNotFoundError:
-        return default_task_details
+        combined_dicts = default_task_details
+
+    return dict(sorted(combined_dicts.items()))
 
 
-task_details = combine_default_and_user_task_details()
+tasks = combine_default_and_user_task_details()
