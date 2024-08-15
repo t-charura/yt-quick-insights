@@ -44,3 +44,16 @@ def load_yaml_file(file_name: str, user_yaml: bool = False) -> dict[str, str]:
         return yaml_content
     except yaml.YAMLError as e:
         raise yaml.YAMLError(f"Error parsing YAML file {yaml_file}: {e}")
+
+
+def get_yaml_location() -> str:
+    """
+    Get the location of the yaml file where the user can define their task details.
+
+    Returns:
+        The location of the yaml file
+    """
+    return (
+        "YouTube Quick Insights is looking for the yaml file at the following location:\n"
+        f'--> [green bold]{settings.HOME_DIR / ".insights" / "task_details.yaml"}[/green bold] <--'
+    )
