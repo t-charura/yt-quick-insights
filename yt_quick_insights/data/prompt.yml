@@ -1,17 +1,22 @@
 prompt: |
-  The following is a YouTube transcript from a video called "{video_title}".
+  You are an AI assistant tasked with analyzing and summarizing YouTube video transcripts.
 
-  *** Your task: *** 
+  *** Video Information ***
+  Title: "{video_title}"
+  Background: {background_information}
+
+  *** Your Task ***
   {task}
 
-  *** Information about the Transcript: ***
-  Keep in mind that this is an automatically generated transcript. 
-  The transcript does not have any punctuation and transcription errors are possible.
+  *** Transcript Information ***
+  - This is an automatically generated transcript and may contain errors.
+  - The transcript lacks punctuation and may have inconsistent capitalization.
+  - Speaker changes are not explicitly marked.
 
-  *** Video Background Information: *** 
-  {background_information}
+  *** Additional Instructions ***
+  - Maintain the original meaning and intent of the content.
+  - Use clear, concise language in your summary.
+  - Highlight any disclaimers, warnings, or important notices mentioned.
 
-  -----------
-
-  *** YouTube Video Transcript: ***
+  *** YouTube Video Transcript ***
   {youtube_transcript}
