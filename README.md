@@ -32,7 +32,8 @@ Download the YouTube transcript, integrate it into a ready-to-use prompt, and us
 
 ### Key Features
 
-* **Prompt Generation:** Generate and download ready-to-use prompts as txt files to help you gain insights from YouTube video content.
+* **Prompt Generation:** Generate and download ready-to-use prompts as txt files to help you gain insights from YouTube
+  video content.
 * **Prompt Customization:** Tailor prompts to fit various needs such as basic summaries, extracting action steps,
   summarizing podcasts, or extracting resources.
 
@@ -86,7 +87,6 @@ Additional you can add background information for the video by using the `-b` fl
 insights download https://www.youtube.com/watch?v=VIDEO_ID -t podcast_summary -b "In this podcast episode 4 guests and a moderator talk about the future of AI."
 ```
 
-
 ### Configure your own task
 
 Create a yaml file in your home directory under `~/.insights/task_details.yml`.
@@ -132,10 +132,8 @@ insights available-tasks
 * [ ] Add option to summarize the transcript directly insight the CLI using an LLM.
 * [ ] Create a web-based interface for non-technical users.
 
-
 ## Contact
 
 * **Website:** Coming soon
 * **Email:** tendai.charura@gmail.com
 * **Github:** [t-charura](https://github.com/t-charura)
-
