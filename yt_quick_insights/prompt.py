@@ -67,7 +67,7 @@ class Prompt:
         """
         Save the final prompt to a text file in your current working directory.
         """
-        file_name = f"{utils.clean_youtube_title(self.title)}.txt"
+        file_name = f"{utils.clean_youtube_video_title(self.title)}.txt"
         prompt = self.create()
         with open(file_name, "w", encoding="utf-8") as file:
             file.write(prompt.text)

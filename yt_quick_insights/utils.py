@@ -5,7 +5,7 @@ import yaml
 from yt_quick_insights.config import settings
 
 
-def clean_youtube_title(video_title: str) -> str:
+def clean_youtube_video_title(video_title: str) -> str:
     """
     Remove unwanted characters from the YouTube video title, because the title is used as a filename.
 
