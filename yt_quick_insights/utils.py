@@ -1,4 +1,5 @@
 import re
+from pathlib import Path
 
 import yaml
 
@@ -19,13 +20,13 @@ def clean_youtube_video_title(video_title: str) -> str:
     return re.sub(r"\s+", " ", allowed_chars).replace(" ", "_")[0:200]
 
 
-def load_yaml_file(file_name: str, user_yaml: bool = False) -> dict[str, str]:
+def load_yaml_file(file_name: str, directory: Path) -> dict[str, str]:
     """
     Load a YAML file from either the project directory or the user's home directory
 
     Args:
         file_name: The name of the YAML file
-        user_yaml: If True, load from user's home directory; otherwise, from project directory.
+        directory: The directory where the YAML file is located
 
     Returns:
         The content of the YAML file as a dictionary
@@ -33,10 +34,7 @@ def load_yaml_file(file_name: str, user_yaml: bool = False) -> dict[str, str]:
     Raises:
         yaml.YAMLError: If there is an error parsing the YAML file
     """
-    yaml_directory = (
-        settings.HOME_DIR / ".insights" if user_yaml else settings.PROJECT_DIR / "data"
-    )
-    yaml_file = yaml_directory / file_name
+    yaml_file = directory / file_name
 
     try:
         with open(yaml_file, "r") as file:

@@ -2,6 +2,7 @@ from enum import Enum
 from typing import Type
 
 from yt_quick_insights import utils
+from yt_quick_insights.config import settings
 
 
 class TaskManager:
@@ -18,7 +19,9 @@ class TaskManager:
             file_name: The name of the YAML file containing the default and user tasks.
         """
         self.file_name = file_name
-        self.default_tasks = utils.load_yaml_file(self.file_name)
+        self.default_tasks = utils.load_yaml_file(
+            file_name=self.file_name, directory=settings.PROJECT_DIR / "data"
+        )
         self.user_tasks = self._load_user_tasks()
         self.tasks = self._merge_tasks()
 
@@ -30,7 +33,7 @@ class TaskManager:
             A dictionary of user-defined tasks.
         """
         try:
-            return utils.load_yaml_file(self.file_name, user_yaml=True)
+            return utils.load_yaml_file(self.file_name, settings.HOME_DIR / ".insights")
         except FileNotFoundError:
             return {}
 

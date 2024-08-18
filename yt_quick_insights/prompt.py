@@ -6,6 +6,7 @@ from rich import print
 
 from yt_quick_insights import YoutubeTranscript
 from yt_quick_insights import utils
+from yt_quick_insights.config import settings
 from yt_quick_insights.task import tasks
 
 
@@ -35,7 +36,9 @@ class Prompt:
             video_url=video_url, video_language=video_language
         )
         self.task = tasks.get(task)
-        self.template = utils.load_yaml_file("prompt.yml").get("prompt")
+        self.template = utils.load_yaml_file(
+            file_name="prompt.yml", directory=settings.PROJECT_DIR / "data"
+        ).get("prompt")
         self.background_information = background_information
 
     def create(self) -> PromptValue:
