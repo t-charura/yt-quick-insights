@@ -134,6 +134,6 @@ insights available-tasks
 
 ## Contact
 
-* **Website:** Coming soon
-* **Email:** tendai.charura@gmail.com
+* **Website:** https://charura.com
+* **Email:** tendai@charura.com
 * **Github:** [t-charura](https://github.com/t-charura)
