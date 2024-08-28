@@ -1,9 +1,8 @@
 import typer
 
-from yt_quick_insights.task import TaskDetails
-from yt_quick_insights.config import settings
 from yt_quick_insights.cli import validate
-
+from yt_quick_insights.config import settings
+from yt_quick_insights.task import TaskDetails
 
 # Shared arguments and options
 
