@@ -1,50 +1,12 @@
 import typer
 from rich import print
 
-from yt_quick_insights import QuickInsights, YoutubeTranscript
 from yt_quick_insights import utils
-from yt_quick_insights.cli import typer_args
+from yt_quick_insights.cli import typer_args, helper
 from yt_quick_insights.config import ENV_DIR
-from yt_quick_insights.config import settings
 from yt_quick_insights.task import TaskDetails, tasks
 
 app = typer.Typer(name="yt-quick-insights")
-
-
-def get_quick_insights(
-    url: str,
-    task_details: TaskDetails,
-    background_information: str,
-    video_language: str,
-) -> QuickInsights:
-    """
-    Get QuickInsights object.
-
-    Args:
-        url: YouTube video url, e.g. "https://www.youtube.com/watch?v=VIDEO_ID"
-        task_details: How to summarize or extract knowledge from th YouTube transcript.
-        background_information: Additional contextual information about the video.
-        video_language: The language of the video. If None, will try: en, de, es, fr
-
-    Returns:
-        QuickInsights object
-    """
-    if video_language is None:
-        video_language = settings.DEFAULT_LANGUAGES
-
-    # Get title and transcript
-    yt_title, yt_transcript = YoutubeTranscript().download_from_url(
-        video_url=url, video_language=video_language
-    )
-    # Get task
-    task = tasks.get(task_details.value)
-    # Extract knowledge
-    return QuickInsights(
-        title=yt_title,
-        transcript=yt_transcript,
-        task=task,
-        background_information=background_information,
-    )
 
 
 @app.command(name="prompt", help="Download the final prompt including the transcript.")
@@ -54,7 +16,7 @@ def download_prompt(
     background_information: str = typer_args.background_information_option,
     video_language: str = typer_args.video_language_option,
 ):
-    quick_insights = get_quick_insights(
+    quick_insights = helper.get_quick_insights(
         url=url,
         task_details=task_details,
         background_information=background_information,
@@ -74,7 +36,7 @@ def extract(
     save_output: bool = typer_args.save_output_option,
     video_language: str = typer_args.video_language_option,
 ):
-    quick_insights = get_quick_insights(
+    quick_insights = helper.get_quick_insights(
         url=url,
         task_details=task_details,
         background_information=background_information,
