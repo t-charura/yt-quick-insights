@@ -1,4 +1,3 @@
-from pathlib import Path
 from typing import Union
 
 import typer
@@ -79,15 +78,14 @@ class QuickInsights:
             }
         )
 
-    def download_prompt(self) -> None:
+    def get_prompt(self) -> str:
         """
-        Save the final prompt to a text file in your current working directory.
-        """
-        file_name = f"{utils.clean_youtube_video_title(self.title)}.txt"
-        prompt = self._invoke(self.prompt_template)
-        utils.save_to_file(file_name=file_name, content=prompt.text)
+        Return the final prompt including the transcript as a string
 
-        print(f'File saved at: "{Path.cwd() / file_name}"')
+        Returns:
+            The final prompt
+        """
+        return self._invoke(self.prompt_template).text
 
     def _extract_knowledge(self, llm: ChatOpenAI) -> str:
         """
@@ -122,14 +120,16 @@ class QuickInsights:
             )
             raise typer.Abort()
 
-    def run(self, model_name: str, api_key: str, save: bool) -> None:
+    def extract(self, model_name: str, api_key: str) -> str:
         """
-        Extract knowledge from the YouTube video using the LLM model.
+        Use LLM to extract knowledge from transcript
 
         Args:
             model_name: OpenAI model name to use
             api_key: OpenAI API key
-            save: whether to save the result as a markdown file
+
+        Returns:
+            The summary of the transcript
         """
         llm = utils.initialize_llm(
             model_name=model_name if model_name else settings.OPENAI_MODEL_NAME,
@@ -137,10 +137,4 @@ class QuickInsights:
         )
         print(f"Using: [green bold]{llm.model_name}[/green bold]\n")
 
-        result = self._extract_knowledge(llm=llm)
-
-        if save:
-            file_name = f"{utils.clean_youtube_video_title(self.title)}.md"
-            utils.save_to_file(file_name=file_name, content=result)
-
-        utils.show_markdown_output(result)
+        return self._extract_knowledge(llm=llm)

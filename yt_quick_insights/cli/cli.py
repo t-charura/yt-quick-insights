@@ -1,3 +1,5 @@
+from pathlib import Path
+
 import typer
 from rich import print
 
@@ -16,14 +18,18 @@ def download_prompt(
     background_information: str = typer_args.background_information_option,
     video_language: str = typer_args.video_language_option,
 ):
+    # Get Prompt
     quick_insights = helper.get_quick_insights(
         url=url,
         task_details=task_details,
         background_information=background_information,
         video_language=video_language,
     )
-    # Download prompt
-    quick_insights.download_prompt()
+    prompt = quick_insights.get_prompt()
+    # Save prompt to file
+    file_name = f"{utils.clean_youtube_video_title(quick_insights.title)}.txt"
+    utils.save_to_file(file_name=file_name, content=prompt)
+    print(f'File saved at: "{Path.cwd() / file_name}"')
 
 
 @app.command(name="extract", help="Extract knowledge from the YouTube transcript.")
@@ -36,14 +42,20 @@ def extract(
     save_output: bool = typer_args.save_output_option,
     video_language: str = typer_args.video_language_option,
 ):
+    # Use LLM to extract knowledge
     quick_insights = helper.get_quick_insights(
         url=url,
         task_details=task_details,
         background_information=background_information,
         video_language=video_language,
     )
-    # Use LLM to extract knowledge
-    quick_insights.run(model_name=model_name, api_key=api_key, save=save_output)
+    insights = quick_insights.extract(model_name=model_name, api_key=api_key)
+
+    if save_output:
+        file_name = f"{utils.clean_youtube_video_title(quick_insights.title)}.md"
+        utils.save_to_file(file_name=file_name, content=insights)
+
+    utils.show_markdown_output(insights)
 
 
 @app.command(name="available-tasks", help="List all available tasks in task_details.")
