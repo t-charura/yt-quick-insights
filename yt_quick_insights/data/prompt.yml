@@ -2,10 +2,11 @@ prompt: |
   You are an AI assistant tasked with analyzing and summarizing YouTube video transcripts.
 
   *** Video Information ***
-  Title: "{video_title}"
-  Background: {background_information}
+  - Video title: "{video_title}"
+  - Background information: {background_information}
 
   *** Your Task ***
+  
   {task}
 
   *** Transcript Information ***
