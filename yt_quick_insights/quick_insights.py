@@ -36,6 +36,7 @@ class QuickInsights:
         """
         self.title = title
         self.transcript = transcript
+        self.est_transcript_tokens = self._estimate_tokens()
         self.task = task
         self.background_information = background_information
         self.prompt_template = self._load_prompt_template()
@@ -56,6 +57,16 @@ class QuickInsights:
                 "youtube_transcript",
             ],
         )
+
+    def _estimate_tokens(self) -> int:
+        """
+        Estimate the number of tokens in the transcript. Assumes 1 token = 4 characters
+
+        Returns:
+            Estimated number of tokens
+        """
+        char_count = len(self.transcript)
+        return char_count // 4
 
     def _invoke(
         self, obj_to_invoke: Union[RunnableSerializable, PromptTemplate]
@@ -111,14 +122,14 @@ class QuickInsights:
                 "You can find your API key at: https://platform.openai.com/account/api-keys.\n"
                 "Please update the value in your .env file."
             )
-            raise typer.Abort()
+            raise typer.Abort("Invalid API key")
         except NotFoundError:
             print(
                 f'The model "{llm.model_name}" does not exist or you do not have access to it.\n'
-                f"You can find all available models at: https://platform.openai.com/docs/models\n"
+                f"You can find all available models at: https://platform.openai.com/docs/models.\n"
                 f"Please update the value in your .env file."
             )
-            raise typer.Abort()
+            raise typer.Abort("Invalid model name")
 
     def extract(self, model_name: str, api_key: str) -> str:
         """
