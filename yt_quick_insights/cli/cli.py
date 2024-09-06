@@ -1,3 +1,4 @@
+import subprocess
 from pathlib import Path
 
 import typer
@@ -5,7 +6,7 @@ from rich import print
 
 from yt_quick_insights import utils
 from yt_quick_insights.cli import typer_args, helper
-from yt_quick_insights.config import ENV_DIR
+from yt_quick_insights.config import ENV_DIR, settings
 from yt_quick_insights.task import TaskDetails, tasks
 
 app = typer.Typer(name="yt-quick-insights")
@@ -49,6 +50,8 @@ def extract(
         background_information=background_information,
         video_language=video_language,
     )
+    if quick_insights.est_transcript_tokens > settings.MAX_TOKENS:
+        print(f"Transcript is {quick_insights.est_transcript_tokens} tokens long. ")
     insights = quick_insights.extract(model_name=model_name, api_key=api_key)
 
     if save_output:
@@ -72,3 +75,8 @@ def yaml_location():
 @app.command(name="env-location", help="Show location of your .env file")
 def env_location():
     print(utils.env_information(ENV_DIR / ".env"))
+
+
+@app.command(name="run", help="Run the Streamlit app.")
+def run():
+    subprocess.run(["streamlit", "run", str(settings.STREAMLIT_APP)])
