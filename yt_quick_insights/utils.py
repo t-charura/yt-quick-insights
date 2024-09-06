@@ -88,6 +88,15 @@ def get_yaml_location() -> str:
 
 
 def env_information(file_path: Path) -> str:
+    """
+    Get information about the .env file
+
+    Args:
+        file_path: The path to the .env file
+
+    Returns:
+        The information about the .env file
+    """
     return (
         "Language Transfer Flashcards (ltf) is looking for the .env file at the following location:\n"
         f"--> [green bold]{file_path}[/green bold] <--\n\n"
@@ -98,7 +107,12 @@ def env_information(file_path: Path) -> str:
     )
 
 
-def show_markdown_output(string) -> None:
-    """Show markdown output in the console."""
+def show_markdown_output(output: str) -> None:
+    """
+    Show markdown output in the console.
+
+    Args
+        output: The markdown output
+    """
     console = Console()
-    console.print(Markdown(string))
+    console.print(Markdown(output))
