@@ -6,5 +6,5 @@ runner = CliRunner()
 
 
 def test_if_cli_help_command_works():
-    result = runner.invoke(app, ["extract", "--help"])
+    result = runner.invoke(app, ["--help"])
     assert result.exit_code == 0
