@@ -10,7 +10,7 @@ prompt: |
   {task}
 
   *** Transcript Information ***
-  - This is an automatically generated transcript and may contain errors.
+  - This is an automatically generated transcript that may contain errors.
   - The transcript lacks punctuation and may have inconsistent capitalization.
   - Speaker changes are not explicitly marked.
 
