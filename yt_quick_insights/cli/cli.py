@@ -4,8 +4,9 @@ from pathlib import Path
 import typer
 from rich import print
 
+from yt_quick_insights import get_quick_insights
 from yt_quick_insights import utils
-from yt_quick_insights.cli import typer_args, helper
+from yt_quick_insights.cli import typer_args
 from yt_quick_insights.config import ENV_DIR, settings
 from yt_quick_insights.task import TaskDetails, tasks
 
@@ -20,7 +21,7 @@ def download_prompt(
     video_language: str = typer_args.video_language_option,
 ):
     # Get Prompt
-    quick_insights = helper.get_quick_insights(
+    quick_insights = get_quick_insights(
         url=url,
         task_details=task_details,
         background_information=background_information,
@@ -44,7 +45,7 @@ def extract(
     video_language: str = typer_args.video_language_option,
 ):
     # Use LLM to extract knowledge
-    quick_insights = helper.get_quick_insights(
+    quick_insights = get_quick_insights(
         url=url,
         task_details=task_details,
         background_information=background_information,
