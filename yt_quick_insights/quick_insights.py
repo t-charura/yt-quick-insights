@@ -15,7 +15,8 @@ from yt_quick_insights.config import settings
 
 class QuickInsights:
     """
-    Please add a docstring here
+    This class provides functionality to extract knowledge from a
+    YouTube video's transcript using a language model (LLM).
     """
 
     def __init__(
