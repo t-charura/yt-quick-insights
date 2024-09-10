@@ -1,0 +1,24 @@
+playlist_prompt: |
+  Synthesize multiple summaries into a single, comprehensive overview 
+  that captures the essence of all input summaries while eliminating redundancies.
+
+  1. Identify and extract:
+      - Central themes
+      - Main ideas
+      - Key supporting points
+      - Unique insights from each summary
+  2. Consolidate the information into a cohesive summary:
+      - Eliminate redundancies
+      - Reconcile any conflicting information
+      - Maintain the original meaning and context
+  3. Structure of the final summary:
+      - Should be in structured bullet points
+      - Flows logically
+      - Provides a balanced representation of all input summaries
+      - Is concise yet comprehensive
+  
+  The Topic and Focus of the final summary should be:
+  {topic_and_focus}
+    
+  --- Summary ---
+  {summaries}
