@@ -83,7 +83,7 @@ def get_yaml_location() -> str:
     """
     return (
         "YouTube Quick Insights is looking for the yaml file at the following location:\n"
-        f'--> [green bold]{settings.LOCAL_CONFIG_DIR / "task_details.yaml"}[/green bold] <--'
+        f'--> [green bold]{settings.LOCAL_CONFIG_DIR / "extraction_methods.yaml"}[/green bold] <--'
     )
 
 
