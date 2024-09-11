@@ -51,6 +51,10 @@ def initialize_llm(model_name: str, api_key: str) -> ChatOpenAI:
     """
     Return an LLM instance
 
+    Args:
+        model_name: The name of the model to use
+        api_key: The API key to use
+
     Returns:
         LLM instance
     """
@@ -75,35 +79,21 @@ def save_to_file(file_name: str, content: str) -> None:
 
 def get_yaml_location() -> str:
     """
-    Get the location of the yaml file where the user can define their task details.
-
-    Returns:
-        The location of the yaml file
+    Returns the location of the yaml file
     """
     return (
         "YouTube Quick Insights is looking for the yaml file at the following location:\n"
-        f'--> [green bold]{settings.HOME_DIR / ".insights" / "task_details.yaml"}[/green bold] <--\n\n'
-        f"Check https://github.com/t-charura/yt-quick-insights for an example yaml file."
+        f'--> [green bold]{settings.LOCAL_CONFIG_DIR / "task_details.yaml"}[/green bold] <--'
     )
 
 
-def env_information(file_path: Path) -> str:
+def env_information() -> str:
     """
-    Get information about the .env file
-
-    Args:
-        file_path: The path to the .env file
-
-    Returns:
-        The information about the .env file
+    Returns the location of the .env file
     """
     return (
-        "Language Transfer Flashcards (ltf) is looking for the .env file at the following location:\n"
-        f"--> [green bold]{file_path}[/green bold] <--\n\n"
-        "File must contain the following variables: 'OPENAI_API_KEY', 'OPENAI_MODEL_NAME' and 'TARGET_LANGUAGE'. \n"
-        "To see all valid values for these variables, run 'ltf csv --help'\n\n"
-        # TODO: update link for example .env file (add a screenshot to README)
-        "Check https://github.com/t-charura/yt-quick-insights for an example .env file."
+        "YouTube Quick Insights is looking for the .env file at the following location:\n"
+        f'--> [green bold]{settings.LOCAL_CONFIG_DIR / ".env"}[/green bold] <--'
     )
 
 
