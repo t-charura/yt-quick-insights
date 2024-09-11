@@ -1,7 +1,7 @@
 import streamlit as st
 
-from yt_quick_insights.task import TaskDetails, tasks
 from yt_quick_insights.frontend import components
+from yt_quick_insights.task import TaskDetails, tasks
 
 
 def display_title_and_description():
@@ -29,7 +29,7 @@ def display_task_details():
     task = st.selectbox(
         "Extraction Method",
         TaskDetails,
-        format_func=lambda x: x.value,
+        format_func=components.format_dropdown_label,
         index=components.default_index,
         label_visibility="collapsed",
     )
