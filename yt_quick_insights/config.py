@@ -4,18 +4,18 @@ from typing import Optional, List
 
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
-# TODO: why is this here and not in the Settings class?
-ENV_DIR = Path.home() / ".insights"
-
 
 class Settings(BaseSettings):
     # OPENAI settings
     OPENAI_API_KEY: Optional[str] = None
     OPENAI_MODEL_NAME: str = "gpt-4o-mini"
 
+    # Directories
     PROJECT_DIR: Path = Path(__file__).resolve().parent
     HOME_DIR: Path = Path.home()
+    LOCAL_CONFIG_DIR: Path = HOME_DIR / ".insights"
 
+    # Application Entry Point
     STREAMLIT_APP: Path = PROJECT_DIR / "frontend" / "streamlit_app.py"
 
     MAX_TOKENS: int = 25_000
@@ -33,8 +33,9 @@ class Settings(BaseSettings):
         "nl",
     ]
 
-    model_config = SettingsConfigDict(env_file=ENV_DIR / ".env")
+    model_config = SettingsConfigDict(env_file=LOCAL_CONFIG_DIR / ".env")
 
+    # Load OPENAI_API_KEY from environment variable if not set in the .env file
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         if self.OPENAI_API_KEY is None:
