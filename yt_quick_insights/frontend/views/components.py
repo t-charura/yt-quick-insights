@@ -1,31 +1,58 @@
 import streamlit as st
 
 from yt_quick_insights.config import settings
-from yt_quick_insights.frontend import st_helper
 from yt_quick_insights.task import TaskDetails
 
+default_task = TaskDetails.default
+default_index = list(TaskDetails).index(default_task)
 
-def user_input_form():
+
+def format_dropdown_label(item):
+    string = item.value
+    return string.replace("_", " ").title()
+
+
+def user_input_form(playlist: bool = False):
 
     with st.form("user_input_form"):
 
-        video_url = st.text_input("YouTube Video URL")
+        url_label = "Playlist URL" if playlist else "YouTube Video URL"
+        url = st.text_input(url_label)
+
+        if playlist:
+            playlist_topic = st.text_input("Playlist Topic & Focus")
+        else:
+            playlist_topic = ""
 
         col1, col2 = st.columns(2)
 
-        task = col1.selectbox(
-            "Extraction Method",
-            TaskDetails,
-            format_func=lambda x: x.value,
-            index=st_helper.default_index,
-        )
+        if playlist:
+            task = TaskDetails.default
+            background_information = ""
+
+        else:
+            task = col1.selectbox(
+                "Extraction Method",
+                TaskDetails,
+                format_func=format_dropdown_label,
+                index=default_index,
+            )
+            background_information = col2.text_input("Video Background Information")
+
         api_key = col2.text_input("OpenAI API Key")
         model_name = col1.text_input("OpenAI Model", settings.OPENAI_MODEL_NAME)
-        background_information = col2.text_input("Video Background Information")
 
         submit = st.form_submit_button("Get Insights")
 
-    return video_url, task, api_key, model_name, background_information, submit
+        return (
+            url,
+            playlist_topic,
+            task,
+            api_key,
+            model_name,
+            background_information,
+            submit,
+        )
 
 
 def display_tokens_warning(transcript_tokens):
