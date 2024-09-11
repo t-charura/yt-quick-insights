@@ -1,7 +1,7 @@
 import streamlit as st
 
 from yt_quick_insights.task import TaskDetails, tasks
-from yt_quick_insights.frontend import st_helper
+from yt_quick_insights.frontend import components
 
 
 def display_title_and_description():
@@ -18,8 +18,7 @@ def display_title_and_description():
 
         To get started:
         - Select an appropriate extraction method from our available options. View all options below.
-        - For custom requirements, refer to the "Custom Extraction Method" tab under "Configuration" 
-        to create your own extraction method.
+        - For custom requirements, refer to the [Custom Extraction Method](/yaml_file) page.
         """
     )
     st.divider()
@@ -31,7 +30,7 @@ def display_task_details():
         "Extraction Method",
         TaskDetails,
         format_func=lambda x: x.value,
-        index=st_helper.default_index,
+        index=components.default_index,
         label_visibility="collapsed",
     )
 

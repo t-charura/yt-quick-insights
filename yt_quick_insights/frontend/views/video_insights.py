@@ -1,7 +1,7 @@
 import streamlit as st
 import typer
 
-from yt_quick_insights.frontend import st_helper
+from yt_quick_insights.frontend import caching
 from yt_quick_insights.frontend.views import components
 
 
@@ -10,19 +10,14 @@ def initialize_session_state():
     """Initialize session states variables."""
     if "submitted" not in st.session_state:
         st.session_state.submitted = False
-    if "insights" not in st.session_state:
-        st.session_state.insights = ""
+    if "video_insights" not in st.session_state:
+        st.session_state.video_insights = ""
 
 
 def display_title_and_description():
     st.title(":material/youtube_activity: YouTube Quick Insights")
     st.markdown(
         "##### Extract valuable insights from YouTube Videos without watching them"
-    )
-
-    st.markdown(
-        """
-        """
     )
 
 
@@ -47,19 +42,21 @@ def display_help():
 
 def process_user_inputs():
     # Get Input Form
-    video_url, task, api_key, model_name, background_information, submit = (
+    video_url, _, task, api_key, model_name, background_information, submit = (
         components.user_input_form()
     )
 
     # Extract insights and set session states
     if submit:
         try:
-            st.session_state.insights, transcript_tokens = st_helper.extract_insights(
-                video_url=video_url,
-                task=task,
-                model_name=model_name,
-                api_key=api_key,
-                background_information=background_information,
+            st.session_state.video_insights, transcript_tokens = (
+                caching.extract_insights(
+                    video_url=video_url,
+                    task=task,
+                    model_name=model_name,
+                    api_key=api_key,
+                    background_information=background_information,
+                )
             )
             components.display_tokens_warning(transcript_tokens)
         except ValueError:
@@ -75,9 +72,9 @@ def process_user_inputs():
 # Display insights
 def display_results():
     if st.session_state.submitted:
-        st.markdown(st.session_state.insights)
+        st.markdown(st.session_state.video_insights)
 
-        if st.session_state.insights:
+        if st.session_state.video_insights:
             st.divider()
             col1, col2 = st.columns(2)
 
@@ -85,7 +82,7 @@ def display_results():
 
             col1.download_button(
                 label="DOWNLOAD",
-                data=st.session_state.insights,
+                data=st.session_state.video_insights,
                 file_name=f"youtube_insights.{file_format}",
                 mime="text/plain",
             )
