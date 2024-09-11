@@ -71,13 +71,18 @@ def display_tokens_warning(transcript_tokens):
 def display_openai_errors(error_message, model_name):
     if "Invalid API key" in str(error_message):
         st.error(
-            "Incorrect API key provided!\n"
-            "You can find your API key at: https://platform.openai.com/account/api-keys.\n"
-            "Please update the value in your .env file."
+            """
+            ##### Invalid API key provided!
+            - You can find your API key at: https://platform.openai.com/account/api-keys.
+            - Check the "Usage Guide" above to learn how to set your API key.
+            """
         )
     elif "Invalid model name" in str(error_message):
         st.error(
-            f'The model "{model_name}" does not exist or you do not have access to it.\n'
-            f"You can find all available models at: https://platform.openai.com/docs/models.\n"
-            f"Please update the value in your .env file."
+            f"""
+            ##### Invalid model name provided!
+            - The model "{model_name}" does not exist or you do not have access to it.
+            - You can find all available models at: https://platform.openai.com/docs/models.
+            - Check [Default Values](/env_file) if you want to change the default model.
+            """
         )
