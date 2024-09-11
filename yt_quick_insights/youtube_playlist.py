@@ -24,8 +24,8 @@ class PlaylistInsights:
             model_name: OpenAI model name
             api_key: OpenAI API key
         """
-        self.yt_video_urls = Playlist(playlist_url).video_urls
-        self.num_videos_in_playlist = len(self.yt_video_urls)
+        self.playlist = Playlist(playlist_url)
+        self.playlist_length = self.playlist.length
         self.model_name = model_name
         self.api_key = api_key
         self.summary_collection: list[str] = list()
@@ -51,14 +51,12 @@ class PlaylistInsights:
         """
         Collect summary from each video in the playlist and store it in the summary_collection list.
         """
-        info = st.info(
-            f"{self.num_videos_in_playlist} videos were found in the playlist."
-        )
+        info = st.info(f"{self.playlist_length} videos were found in the playlist.")
         progress_bar = st.progress(0, text="Downloading Videos")
-        for idx, url in enumerate(self.yt_video_urls, start=1):  # type: str
+        for idx, url in enumerate(self.playlist.video_urls, start=1):  # type: str
             progress_bar.progress(
-                idx * int(100 / self.num_videos_in_playlist),
-                text=f"Extracting Insights from Video {idx} of {self.num_videos_in_playlist}",
+                idx * int(100 / self.playlist_length),
+                text=f"Extracting Insights from Video {idx} of {self.playlist_length}",
             )
             summary = get_quick_insights(
                 url=url,
