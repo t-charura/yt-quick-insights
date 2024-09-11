@@ -5,8 +5,9 @@ st.title(":material/text_snippet: Default Values with `.env` File")
 st.subheader("Why create a `.env` file?")
 st.markdown(
     """
-    - Securely store your OPENAI_API_KEY. Eliminating the need to copy and paste your API key every time you run the app.
-    - Configure your preferred OpenAI model
+    - Securely store your OPENAI_API_KEY. 
+    Eliminating the need to copy and paste your API key every time you run the app.
+    - Set your favorite OpenAI model as default.
     - The app will automatically detect and utilize the API key and model name as defaults.
     """
 )
@@ -18,7 +19,7 @@ st.markdown(
     2. Add the following variables to the file:
 
     ``` properties
-    OPENAI_API_KEY=<YOUR_OPENAI_API_KEY>
+    OPENAI_API_KEY=YOUR_OPENAI_API_KEY
     OPENAI_MODEL_NAME=gpt-4o-mini
     ```
 
@@ -28,6 +29,7 @@ st.markdown(
     insights env-location
     ```
 
-    For a comprehensive list of available OpenAI model names, please refer to the [official documentation](https://platform.openai.com/docs/models).
+    For a comprehensive list of available OpenAI model names, 
+    please refer to the [official documentation](https://platform.openai.com/docs/models).
     """
 )
