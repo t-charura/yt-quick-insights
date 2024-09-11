@@ -38,13 +38,8 @@ st.markdown(
     ``` bash
     insights yaml-location
     ```
+    
+    For a comprehensive list of available Extraction Methods, 
+    click [here](/extraction_methods#available-extraction-methods).
     """
-)
-st.write(
-    "For a comprehensive list of available Extraction Methods, please refer to the link below."
-)
-st.page_link(
-    "views/task_details.py",
-    label="Available Extraction Methods",
-    icon=":material/manufacturing:",
 )
