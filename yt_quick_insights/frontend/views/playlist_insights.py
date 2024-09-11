@@ -1,8 +1,10 @@
+from urllib.error import HTTPError
+
 import streamlit as st
 import typer
 
-from yt_quick_insights.frontend import components
 from yt_quick_insights.frontend import caching
+from yt_quick_insights.frontend import components
 
 
 def initialize_session_state():
@@ -58,9 +60,9 @@ def process_user_inputs():
                 model_name=model_name,
                 api_key=api_key,
             )
-        except ValueError:
+        except (HTTPError, KeyError):
             st.error(
-                "Please provide a valid YouTube URL in the form of 'https://www.youtube.com/watch?v=VIDEO_ID'"
+                "Please provide a valid YouTube Playlist URL in the form of 'https://www.youtube.com/playlist?list=PLAYLIST_ID'"
             )
         except typer.Abort as e:
             components.display_openai_errors(e, model_name)
