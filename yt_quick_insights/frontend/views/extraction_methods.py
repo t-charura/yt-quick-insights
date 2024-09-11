@@ -1,7 +1,7 @@
 import streamlit as st
 
 from yt_quick_insights.frontend import components
-from yt_quick_insights.task import TaskDetails, tasks
+from yt_quick_insights.task import ExtractionMethods, available_extraction_methods
 
 
 def display_title_and_description():
@@ -24,24 +24,24 @@ def display_title_and_description():
     st.divider()
 
 
-def display_task_details():
+def display_extraction_methods():
     st.subheader("Available Extraction Methods")
     task = st.selectbox(
         "Extraction Method",
-        TaskDetails,
+        ExtractionMethods,
         format_func=components.format_dropdown_label,
         index=components.default_index,
         label_visibility="collapsed",
     )
 
     if task:
-        st.markdown(tasks.get(task.value))
+        st.markdown(available_extraction_methods.get(task.value))
 
 
-def render_task_details():
+def render_extraction_methods():
     """Create task details page structure."""
     display_title_and_description()
-    display_task_details()
+    display_extraction_methods()
 
 
-render_task_details()
+render_extraction_methods()

@@ -1,10 +1,10 @@
 import streamlit as st
 
 from yt_quick_insights.config import settings
-from yt_quick_insights.task import TaskDetails
+from yt_quick_insights.task import ExtractionMethods
 
-default_task = TaskDetails.default
-default_index = list(TaskDetails).index(default_task)
+default_task = ExtractionMethods.default
+default_index = list(ExtractionMethods).index(default_task)
 
 
 def format_dropdown_label(item):
@@ -27,13 +27,13 @@ def user_input_form(playlist: bool = False):
         col1, col2 = st.columns(2)
 
         if playlist:
-            task = TaskDetails.default
+            task = ExtractionMethods.default
             background_information = ""
 
         else:
             task = col1.selectbox(
                 "Extraction Method",
-                TaskDetails,
+                ExtractionMethods,
                 format_func=format_dropdown_label,
                 index=default_index,
             )

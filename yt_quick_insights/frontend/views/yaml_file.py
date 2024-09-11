@@ -19,7 +19,7 @@ st.markdown(
 st.subheader("How to create a custom extraction method?")
 st.markdown(
     """
-    1. Create a YAML file named `task_details.yml` in the following directory: `~/.insights/`
+    1. Create a YAML file named `extraction_methods.yml` in the following directory: `~/.insights/`
     2. Structure your YAML file as follows:
 
     ``` yaml

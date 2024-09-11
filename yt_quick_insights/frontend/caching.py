@@ -4,13 +4,13 @@ import streamlit as st
 
 from yt_quick_insights import get_quick_insights, PlaylistInsights
 from yt_quick_insights.config import settings
-from yt_quick_insights.task import TaskDetails
+from yt_quick_insights.task import ExtractionMethods
 
 
 @st.cache_data
 def extract_insights(
     video_url: str,
-    task: TaskDetails,
+    task: ExtractionMethods,
     model_name: str | None,
     api_key: str | None,
     background_information: str,

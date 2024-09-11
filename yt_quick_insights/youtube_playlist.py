@@ -5,7 +5,7 @@ from pytube import Playlist
 from yt_quick_insights import get_quick_insights
 from yt_quick_insights import utils
 from yt_quick_insights.config import settings
-from yt_quick_insights.task import TaskDetails
+from yt_quick_insights.task import ExtractionMethods
 
 
 class PlaylistInsights:
@@ -25,6 +25,7 @@ class PlaylistInsights:
             api_key: OpenAI API key
         """
         self.yt_video_urls = Playlist(playlist_url).video_urls
+        self.num_videos_in_playlist = len(self.yt_video_urls)
         self.model_name = model_name
         self.api_key = api_key
         self.summary_collection: list[str] = list()
@@ -50,22 +51,25 @@ class PlaylistInsights:
         """
         Collect summary from each video in the playlist and store it in the summary_collection list.
         """
+        info = st.info(
+            f"{self.num_videos_in_playlist} videos were found in the playlist."
+        )
         progress_bar = st.progress(0, text="Downloading Videos")
-        num_videos = len(self.yt_video_urls)
         for idx, url in enumerate(self.yt_video_urls, start=1):  # type: str
             progress_bar.progress(
-                idx * int(100 / num_videos),
-                text=f"Extracting Insights from Video {idx} of {num_videos}",
+                idx * int(100 / self.num_videos_in_playlist),
+                text=f"Extracting Insights from Video {idx} of {self.num_videos_in_playlist}",
             )
             summary = get_quick_insights(
                 url=url,
-                task_details=TaskDetails.default,
+                task_details=ExtractionMethods.default,
                 background_information="",
                 video_language=settings.DEFAULT_LANGUAGES,
             ).extract(model_name=self.model_name, api_key=self.api_key)
 
             self.summary_collection.append(summary)
 
+        info.empty()
         progress_bar.empty()
 
     def extract(self, topic_and_focus: str) -> str:

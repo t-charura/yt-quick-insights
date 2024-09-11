@@ -27,7 +27,7 @@ def display_help():
             """
             1. **YouTube Video URL**: Paste the YouTube video URL in the designated field (required).
             2. **Extraction Method**: Select an appropriate method based on the video content. When in doubt, use the default method. 
-               For detailed information on available methods, click [here](/task_details).
+               For detailed information on available methods, click [here](/extraction_methods).
             3. **OpenAI API Key**: Provide your API key in one of the following ways:
                - Enter it directly in the provided field.
                - Set it in the `.env` file (recommended). Learn more [here](/env_file).

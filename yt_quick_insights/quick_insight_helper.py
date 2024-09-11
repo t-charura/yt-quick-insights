@@ -1,11 +1,11 @@
 from yt_quick_insights import QuickInsights, YoutubeTranscript
 from yt_quick_insights.config import settings
-from yt_quick_insights.task import TaskDetails, tasks
+from yt_quick_insights.task import ExtractionMethods, available_extraction_methods
 
 
 def get_quick_insights(
     url: str,
-    task_details: TaskDetails,
+    task_details: ExtractionMethods,
     background_information: str,
     video_language: str,
 ) -> QuickInsights:
@@ -28,12 +28,12 @@ def get_quick_insights(
     yt_title, yt_transcript = YoutubeTranscript().download_from_url(
         video_url=url, video_language=video_language
     )
-    # Get task
-    task = tasks.get(task_details.value)
+    # Get extraction method
+    extraction_methods = available_extraction_methods.get(task_details.value)
     # Initialize QuickInsights object
     return QuickInsights(
         title=yt_title,
         transcript=yt_transcript,
-        task=task,
+        task=extraction_methods,
         background_information=background_information,
     )
