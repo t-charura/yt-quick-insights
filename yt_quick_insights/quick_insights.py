@@ -43,7 +43,7 @@ class QuickInsights:
         self.prompt_template = self._load_prompt_template()
 
     @staticmethod
-    def _load_prompt_template():
+    def _load_prompt_template() -> PromptTemplate:
         """Load template from YAML file and convert into PromptTemplate"""
         template = utils.load_yaml_file(
             file_name="prompt.yml", directory=settings.PROJECT_DIR / "data"
