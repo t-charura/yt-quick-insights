@@ -59,14 +59,15 @@ def process_user_inputs():
                 )
             )
             components.display_tokens_warning(transcript_tokens)
+            st.session_state.submitted = True
         except ValueError:
             st.error(
                 "Please provide a valid YouTube URL in the form of 'https://www.youtube.com/watch?v=VIDEO_ID'"
             )
+            st.session_state.submitted = False
         except typer.Abort as e:
             components.display_openai_errors(e, model_name)
-
-        st.session_state.submitted = True
+            st.session_state.submitted = False
 
 
 # Display insights

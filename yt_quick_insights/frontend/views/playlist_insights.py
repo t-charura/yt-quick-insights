@@ -60,14 +60,15 @@ def process_user_inputs():
                 model_name=model_name,
                 api_key=api_key,
             )
+            st.session_state.submitted = True
         except (HTTPError, KeyError):
             st.error(
                 "Please provide a valid YouTube Playlist URL in the form of 'https://www.youtube.com/playlist?list=PLAYLIST_ID'"
             )
+            st.session_state.submitted = False
         except typer.Abort as e:
             components.display_openai_errors(e, model_name)
-
-        st.session_state.submitted = True
+            st.session_state.submitted = False
 
 
 def display_results():
