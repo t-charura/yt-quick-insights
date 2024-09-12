@@ -10,14 +10,19 @@ def display_title_and_description():
     st.markdown(
         """
         Extraction Methods are specialized instructions designed to efficiently summarize and analyze video content.
-        Suitable for various content types, including:
-       - General summaries of key points
-       - Comprehensive podcast overviews
-       - Extraction of specific action steps and recommendations
-       - Compilation of resources mentioned in the video
+        Based on the content of the video, select an appropriate extraction method.
+        
+        Overview of all available extraction methods:
+        - **Extensive Summary**: Generate long and extensive summaries with lots of details        
+        - **General Summary**: Default, can be used for any type of content
+        - **How To Extraction**: For how to videos, Guides and tutorials
+        - **Knowledge Extraction**: For informational videos to understand a topic
+        - **Podcast Summary**: For podcast and discussions
+        - **Resource Extraction**: Quick overview of all resources mentioned in the video
+        - **Short Summary**: Summary of 3-6 bullet points
 
         To get started:
-        - Select an appropriate extraction method from our available options. View all options below.
+        - Select an appropriate extraction method from our available options. View all options in detail below.
         - For custom requirements, refer to the [Custom Extraction Method](/yaml_file) page.
         """
     )
