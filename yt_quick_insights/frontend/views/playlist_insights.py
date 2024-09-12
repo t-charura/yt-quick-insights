@@ -3,6 +3,7 @@ from urllib.error import HTTPError
 import streamlit as st
 import typer
 
+from yt_quick_insights.config import settings
 from yt_quick_insights.frontend import caching
 from yt_quick_insights.frontend import components
 
@@ -24,10 +25,6 @@ def display_title_and_description():
 
 def display_help():
     with st.expander(":material/help:  Usage Guide"):
-        explain_additional_instructions = (
-            "The playlist is about 'productivity'.\n"
-            "My focus is to learn specifically about productive morning routines"
-        )
         st.markdown(
             """
             1. **Playlist URL**: Paste the YouTube playlist URL in the designated field (required).
@@ -59,6 +56,12 @@ def process_user_inputs():
 
     # Extract insights and set session states
     if submit:
+        # Check if API key and model name are provided
+        if not api_key:
+            api_key = settings.OPENAI_API_KEY
+        if not model_name:
+            model_name = settings.OPENAI_MODEL_NAME
+
         try:
             st.session_state.playlist_insights = caching.extract_playlist_insights(
                 playlist_url=playlist_url,

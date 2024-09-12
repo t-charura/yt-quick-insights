@@ -140,7 +140,7 @@ class QuickInsights:
             The summary of the transcript
         """
         llm = utils.initialize_llm(
-            model_name=model_name if model_name else settings.OPENAI_MODEL_NAME,
+            model_name=model_name,
             api_key=api_key,
         )
         print(f"Using: [green bold]{llm.model_name}[/green bold]\n")

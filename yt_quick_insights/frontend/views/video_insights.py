@@ -1,6 +1,7 @@
 import streamlit as st
 import typer
 
+from yt_quick_insights.config import settings
 from yt_quick_insights.frontend import caching
 from yt_quick_insights.frontend.views import components
 
@@ -48,6 +49,12 @@ def process_user_inputs():
 
     # Extract insights and set session states
     if submit:
+        # Check if API key and model name are provided
+        if not api_key:
+            api_key = settings.OPENAI_API_KEY
+        if not model_name:
+            model_name = settings.OPENAI_MODEL_NAME
+
         try:
             st.session_state.video_insights, transcript_tokens = (
                 caching.extract_insights(

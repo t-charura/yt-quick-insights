@@ -34,8 +34,8 @@ def extract_insights(
 
     return (
         quick_insights.extract(
-            model_name=model_name if model_name else settings.OPENAI_MODEL_NAME,
-            api_key=api_key if api_key else settings.OPENAI_API_KEY,
+            model_name=model_name,
+            api_key=api_key,
         ),
         quick_insights.est_transcript_tokens,
     )
@@ -65,8 +65,8 @@ def extract_playlist_insights(
     """
     playlist_insights = PlaylistInsights(
         playlist_url=playlist_url,
-        model_name=model_name if model_name else settings.OPENAI_MODEL_NAME,
-        api_key=api_key if api_key else settings.OPENAI_API_KEY,
+        model_name=model_name,
+        api_key=api_key,
         extraction_method=extraction_method,
     )
     return playlist_insights.extract(
