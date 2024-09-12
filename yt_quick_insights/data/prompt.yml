@@ -17,7 +17,7 @@ prompt: |
   *** Additional Instructions ***
   - Maintain the original meaning and intent of the content.
   - Use clear, concise language in your summary.
-  - Highlight any disclaimers, warnings, or important notices mentioned.
+  - Highlight any disclaimers or warnings mentioned.
 
   *** YouTube Video Transcript ***
   {youtube_transcript}

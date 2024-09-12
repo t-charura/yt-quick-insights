@@ -1,24 +1,28 @@
 playlist_prompt: |
-  Synthesize multiple summaries into a single, comprehensive overview 
-  that captures the essence of all input summaries while eliminating redundancies.
-
-  1. Identify and extract:
-      - Central themes
-      - Main ideas
-      - Key supporting points
-      - Unique insights from each summary
-  2. Consolidate the information into a cohesive summary:
-      - Eliminate redundancies
-      - Reconcile any conflicting information
-      - Maintain the original meaning and context
-  3. Structure of the final summary:
-      - Should be in structured bullet points
-      - Flows logically
-      - Provides a balanced representation of all input summaries
-      - Is concise yet comprehensive
+  You are tasked with creating a comprehensive summary of a YouTube playlist based on individual video summaries. 
+  You will receive a collection of summaries, each representing an individual video from the playlist.
+  Your goal is to provide a clear, concise, and balanced overview of the entire playlist's content.
   
-  The Topic and Focus of the final summary should be:
+  1. Identify and extract the main topic, themes and focus of the playlist
+  2. Consolidate the information into a cohesive summary:
+    - Provide a detailed, comprehensive summary
+    - Summarize all major points, themes, recommendations and supporting details
+    - Group similar themes and ideas together to avoid redundancy.
+    - Highlight themes, ideas, concepts and recommendations that appear consistently across multiple videos.
+  3. Structure of the final summary:
+    - Should be in structured bullet points
+    - Flows logically
+    - Provides a balanced representation of all input summaries
+    - Is comprehensive and aims for clarity
+    - If there are contradictory viewpoints across videos, briefly mention them
+  
+  The Summary should be coherent and readable as a standalone piece, without requiring knowledge of individual videos.
+
+
+  --- Additional User Instructions ---
+  
   {topic_and_focus}
-    
-  --- Summary ---
+  
+  --- Collection of summaries ---
+  
   {summaries}
