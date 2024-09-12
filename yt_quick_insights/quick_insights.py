@@ -24,7 +24,6 @@ class QuickInsights:
         title: str,
         transcript: str,
         task: str,
-        background_information: str,
     ):
         """
         Initialize the class with the video URL, task, background information, and video language.
@@ -33,13 +32,11 @@ class QuickInsights:
             title: The title of the YouTube video.
             transcript: The transcript of the YouTube video.
             task: Specification on how to summarize the transcript.
-            background_information: Additional contextual information about the video.
         """
         self.title = title
         self.transcript = transcript
         self.est_transcript_tokens = self._estimate_tokens()
         self.task = task
-        self.background_information = background_information
         self.prompt_template = self._load_prompt_template()
 
     @staticmethod
@@ -85,7 +82,6 @@ class QuickInsights:
             {
                 "video_title": self.title,
                 "task": self.task.rstrip(),
-                "background_information": self.background_information,
                 "youtube_transcript": self.transcript,
             }
         )

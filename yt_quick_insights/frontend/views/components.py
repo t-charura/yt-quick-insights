@@ -3,7 +3,7 @@ import streamlit as st
 from yt_quick_insights.config import settings
 from yt_quick_insights.task import ExtractionMethods
 
-default_task = ExtractionMethods.default
+default_task = ExtractionMethods.general_summary
 default_index = list(ExtractionMethods).index(default_task)
 
 
@@ -20,24 +20,30 @@ def user_input_form(playlist: bool = False):
         url = st.text_input(url_label)
 
         if playlist:
-            playlist_topic = st.text_input("Playlist Topic & Focus")
+            additional_instructions = st.text_area(
+                "Additional Instructions (optional)",
+            )
+
+            if not additional_instructions:
+                additional_instructions = (
+                    "No additional instructions, focus on the instructions above"
+                )
         else:
-            playlist_topic = ""
+            additional_instructions = ""
+
+        em_label = (
+            "Extraction Method used for individual videos"
+            if playlist
+            else "Extraction Method"
+        )
+        extraction_method = st.selectbox(
+            em_label,
+            ExtractionMethods,
+            format_func=format_dropdown_label,
+            index=default_index,
+        )
 
         col1, col2 = st.columns(2)
-
-        if playlist:
-            task = ExtractionMethods.default
-            background_information = ""
-
-        else:
-            task = col1.selectbox(
-                "Extraction Method",
-                ExtractionMethods,
-                format_func=format_dropdown_label,
-                index=default_index,
-            )
-            background_information = col2.text_input("Video Background Information")
 
         api_key = col2.text_input("OpenAI API Key")
         model_name = col1.text_input("OpenAI Model", settings.OPENAI_MODEL_NAME)
@@ -46,11 +52,10 @@ def user_input_form(playlist: bool = False):
 
         return (
             url,
-            playlist_topic,
-            task,
+            additional_instructions,
+            extraction_method,
             api_key,
             model_name,
-            background_information,
             submit,
         )
 

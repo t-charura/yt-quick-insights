@@ -15,7 +15,13 @@ class PlaylistInsights:
     and consolidates them into a single cohesive summary using a language model.
     """
 
-    def __init__(self, playlist_url: str, model_name: str, api_key: str):
+    def __init__(
+        self,
+        playlist_url: str,
+        model_name: str,
+        api_key: str,
+        extraction_method: ExtractionMethods,
+    ):
         """
         Initialize the class with the YouTube playlist URL, OpenAI model name, and OpenAI API key.
 
@@ -23,6 +29,7 @@ class PlaylistInsights:
             playlist_url: YouTube playlist URL
             model_name: OpenAI model name
             api_key: OpenAI API key
+            extraction_method: Method used to extract insights from individual videos
         """
         self.playlist = Playlist(playlist_url)
         self.playlist_length = self.playlist.length
@@ -30,7 +37,7 @@ class PlaylistInsights:
         self.api_key = api_key
         self.summary_collection: list[str] = list()
         self.prompt_template = self._load_prompt_template()
-        # Final prompt template
+        self.extraction_method = extraction_method
 
     @staticmethod
     def _load_prompt_template() -> PromptTemplate:
@@ -42,7 +49,7 @@ class PlaylistInsights:
         return PromptTemplate(
             template=template.get("playlist_prompt"),
             input_variables=[
-                "topic_and_focus",
+                "additional_instructions",
                 "summaries",
             ],
         )
@@ -60,8 +67,7 @@ class PlaylistInsights:
             )
             summary = get_quick_insights(
                 url=url,
-                task_details=ExtractionMethods.default,
-                background_information="",
+                task_details=self.extraction_method,
                 video_language=settings.DEFAULT_LANGUAGES,
             ).extract(model_name=self.model_name, api_key=self.api_key)
 
@@ -70,13 +76,13 @@ class PlaylistInsights:
         info.empty()
         progress_bar.empty()
 
-    def extract(self, topic_and_focus: str) -> str:
+    def extract(self, additional_instructions: str) -> str:
         """
         Extract insights from all videos in the playlist
         and consolidate them into a single cohesive summary.
 
         Args:
-            topic_and_focus: The topic and focus of the playlist
+            additional_instructions: Additional instructions for the summary
 
         Returns:
             Consolidated insights from all videos in the playlist
@@ -92,7 +98,7 @@ class PlaylistInsights:
             chain = self.prompt_template | llm
             return chain.invoke(
                 {
-                    "topic_and_focus": topic_and_focus,
+                    "additional_instructions": additional_instructions,
                     "summaries": joined_summaries,
                 }
             ).content

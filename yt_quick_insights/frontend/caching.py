@@ -13,7 +13,6 @@ def extract_insights(
     task: ExtractionMethods,
     model_name: str | None,
     api_key: str | None,
-    background_information: str,
 ) -> Tuple[str, int]:
     """
     Extract insights from YouTube transcript. Returns the summary and number of tokens.
@@ -23,7 +22,6 @@ def extract_insights(
         task: Specification on how to summarize the transcript.
         model_name: OpenAI model name
         api_key: OpenAI API key
-        background_information: Additional contextual information about the video.
 
     Returns:
         The summary of the transcript and the number of tokens
@@ -31,7 +29,6 @@ def extract_insights(
     quick_insights = get_quick_insights(
         url=video_url,
         task_details=task,
-        background_information=background_information,
         video_language=settings.DEFAULT_LANGUAGES,
     )
 
@@ -47,7 +44,8 @@ def extract_insights(
 @st.cache_data(show_spinner=False)
 def extract_playlist_insights(
     playlist_url: str,
-    topic_and_focus: str,
+    additional_instructions: str,
+    extraction_method: ExtractionMethods,
     model_name: str | None,
     api_key: str | None,
 ) -> str:
@@ -57,7 +55,8 @@ def extract_playlist_insights(
 
     Args:
         playlist_url: YouTube playlist url, e.g. "https://www.youtube.com/playlist?list=PLAYLIST_ID"
-        topic_and_focus: Topic of the playlist and focus of the summary
+        additional_instructions: Additional instructions for the summary.
+        extraction_method: Specification on how to summarize the transcript.
         model_name: OpenAI model name
         api_key: OpenAI API key
 
@@ -68,7 +67,8 @@ def extract_playlist_insights(
         playlist_url=playlist_url,
         model_name=model_name if model_name else settings.OPENAI_MODEL_NAME,
         api_key=api_key if api_key else settings.OPENAI_API_KEY,
+        extraction_method=extraction_method,
     )
     return playlist_insights.extract(
-        topic_and_focus=topic_and_focus,
+        additional_instructions=additional_instructions,
     )

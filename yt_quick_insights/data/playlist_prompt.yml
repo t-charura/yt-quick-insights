@@ -21,7 +21,7 @@ playlist_prompt: |
 
   --- Additional User Instructions ---
   
-  {topic_and_focus}
+  {additional_instructions}
   
   --- Collection of summaries ---
   

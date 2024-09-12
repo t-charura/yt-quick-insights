@@ -21,12 +21,13 @@ def display_title_and_description():
     )
 
 
-def display_help():
+def display_usage_guide():
     with st.expander(":material/help:  Usage Guide"):
         st.markdown(
             """
             1. **YouTube Video URL**: Paste the YouTube video URL in the designated field (required).
-            2. **Extraction Method**: Select an appropriate method based on the video content. When in doubt, use the default method. 
+            2. **Extraction Method**: Select an appropriate method based on the video content. When in doubt, 
+               use the `General Summary` method. 
                For detailed information on available methods, click [here](/extraction_methods).
             3. **OpenAI API Key**: Provide your API key in one of the following ways:
                - Enter it directly in the provided field.
@@ -34,7 +35,6 @@ def display_help():
                - Store the key in an environment variable called: `OPENAI_API_KEY`.
             4. **OpenAI Model**: Choose your preferred model (default: `gpt-4o-mini`).
                View all available models [here](https://platform.openai.com/docs/models).
-            5. **Video Background Information**: (Optional) Additional contextual information about the video.
             """,
             unsafe_allow_html=True,
         )
@@ -42,7 +42,7 @@ def display_help():
 
 def process_user_inputs():
     # Get Input Form
-    video_url, _, task, api_key, model_name, background_information, submit = (
+    video_url, _, extraction_method, api_key, model_name, submit = (
         components.user_input_form()
     )
 
@@ -52,10 +52,9 @@ def process_user_inputs():
             st.session_state.video_insights, transcript_tokens = (
                 caching.extract_insights(
                     video_url=video_url,
-                    task=task,
+                    task=extraction_method,
                     model_name=model_name,
                     api_key=api_key,
-                    background_information=background_information,
                 )
             )
             components.display_tokens_warning(transcript_tokens)
@@ -93,7 +92,7 @@ def render_homepage():
     """Create homepage structure."""
     initialize_session_state()
     display_title_and_description()
-    display_help()
+    display_usage_guide()
     process_user_inputs()
     display_results()
 

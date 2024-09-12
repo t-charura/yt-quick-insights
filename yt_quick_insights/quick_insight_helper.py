@@ -6,7 +6,6 @@ from yt_quick_insights.task import ExtractionMethods, available_extraction_metho
 def get_quick_insights(
     url: str,
     task_details: ExtractionMethods,
-    background_information: str,
     video_language: str,
 ) -> QuickInsights:
     """
@@ -15,7 +14,6 @@ def get_quick_insights(
     Args:
         url: YouTube video url, e.g. "https://www.youtube.com/watch?v=VIDEO_ID"
         task_details: How to summarize or extract knowledge from th YouTube transcript.
-        background_information: Additional contextual information about the video.
         video_language: The language of the video. If None, will try: en, de, es, fr
 
     Returns:
@@ -35,5 +33,4 @@ def get_quick_insights(
         title=yt_title,
         transcript=yt_transcript,
         task=extraction_methods,
-        background_information=background_information,
     )

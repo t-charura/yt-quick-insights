@@ -24,15 +24,22 @@ def display_title_and_description():
 
 def display_help():
     with st.expander(":material/help:  Usage Guide"):
+        explain_additional_instructions = (
+            "The playlist is about 'productivity'.\n"
+            "My focus is to learn specifically about productive morning routines"
+        )
         st.markdown(
             """
             1. **Playlist URL**: Paste the YouTube playlist URL in the designated field (required).
-            2. **Playlist Topic & Focus**: Add description later
-            3. **OpenAI API Key**: Provide your API key in one of the following ways:
+            2. **Additional Instructions**: Additional instructions for summarizing the playlist (optional).
+            3. **Extraction Method**: Select an appropriate method based on the video content. When in doubt, 
+               use the `General Summary` method. 
+               For detailed information on available methods, click [here](/extraction_methods).
+            4. **OpenAI API Key**: Provide your API key in one of the following ways:
                - Enter it directly in the provided field.
                - Set it in the `.env` file (recommended). Learn more [here](/env_file).
                - Store the key in an environment variable called: `OPENAI_API_KEY`.
-            4. **OpenAI Model**: Choose your preferred model (default: `gpt-4o-mini`).
+            5. **OpenAI Model**: Choose your preferred model (default: `gpt-4o-mini`).
                View all available models [here](https://platform.openai.com/docs/models).
             """,
             unsafe_allow_html=True,
@@ -43,11 +50,10 @@ def process_user_inputs():
     # Get Input Form
     (
         playlist_url,
-        playlist_topic,
-        task,
+        additional_instructions,
+        extraction_method,
         api_key,
         model_name,
-        background_information,
         submit,
     ) = components.user_input_form(playlist=True)
 
@@ -56,7 +62,8 @@ def process_user_inputs():
         try:
             st.session_state.playlist_insights = caching.extract_playlist_insights(
                 playlist_url=playlist_url,
-                topic_and_focus=playlist_topic,
+                additional_instructions=additional_instructions,
+                extraction_method=extraction_method,
                 model_name=model_name,
                 api_key=api_key,
             )

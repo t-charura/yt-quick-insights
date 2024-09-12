@@ -3,7 +3,6 @@ prompt: |
 
   *** Video Information ***
   - Video title: "{video_title}"
-  - Background information: {background_information}
 
   *** Your Task ***
   
