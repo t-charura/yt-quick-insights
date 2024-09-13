@@ -51,7 +51,6 @@ class QuickInsights:
             input_variables=[
                 "video_title",
                 "task",
-                "background_information",
                 "youtube_transcript",
             ],
         )
@@ -143,6 +142,51 @@ class QuickInsights:
             model_name=model_name,
             api_key=api_key,
         )
-        print(f"Using: [green bold]{llm.model_name}[/green bold]\n")
 
         return self._extract_knowledge(llm=llm)
+
+
+class DeepDive:
+    """
+    Answer a user's question about a YouTube video.
+    Using the video transcript and a LLM
+    """
+
+    def __init__(self, title: str, transcript: str, user_question: str):
+        self.title = title
+        self.transcript = transcript
+        self.user_question = user_question
+        self.prompt_template = self._load_prompt_template()
+
+    @staticmethod
+    def _load_prompt_template() -> PromptTemplate:
+        """Load template from YAML file and convert into PromptTemplate"""
+        template = utils.load_yaml_file(
+            file_name="deep_dive.yml", directory=settings.PROJECT_DIR / "data"
+        )
+
+        return PromptTemplate(
+            template=template.get("prompt"),
+            input_variables=[
+                "video_title",
+                "question",
+                "youtube_transcript",
+            ],
+        )
+
+    def extract(self, model_name: str, api_key: str) -> str:
+        llm = utils.initialize_llm(model_name=model_name, api_key=api_key)
+        chain = self.prompt_template | llm
+
+        try:
+            return chain.invoke(
+                {
+                    "video_title": self.title,
+                    "question": self.user_question,
+                    "youtube_transcript": self.transcript,
+                }
+            ).content
+        except AuthenticationError:
+            raise typer.Abort("Invalid API key")
+        except NotFoundError:
+            raise typer.Abort("Invalid model name")

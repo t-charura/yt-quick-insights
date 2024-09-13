@@ -2,7 +2,12 @@ from typing import Tuple
 
 import streamlit as st
 
-from yt_quick_insights import get_quick_insights, PlaylistInsights
+from yt_quick_insights import (
+    get_quick_insights,
+    PlaylistInsights,
+    DeepDive,
+    YoutubeTranscript,
+)
 from yt_quick_insights.config import settings
 from yt_quick_insights.task import ExtractionMethods
 
@@ -11,8 +16,8 @@ from yt_quick_insights.task import ExtractionMethods
 def extract_insights(
     video_url: str,
     task: ExtractionMethods,
-    model_name: str | None,
-    api_key: str | None,
+    model_name: str,
+    api_key: str,
 ) -> Tuple[str, int]:
     """
     Extract insights from YouTube transcript. Returns the summary and number of tokens.
@@ -46,8 +51,8 @@ def extract_playlist_insights(
     playlist_url: str,
     additional_instructions: str,
     extraction_method: ExtractionMethods,
-    model_name: str | None,
-    api_key: str | None,
+    model_name: str,
+    api_key: str,
 ) -> str:
     """
     Extract insights from YouTube playlist by summarizing all summaries
@@ -72,3 +77,35 @@ def extract_playlist_insights(
     return playlist_insights.extract(
         additional_instructions=additional_instructions,
     )
+
+
+@st.cache_data
+def answer_question(
+    video_url: str,
+    question: str,
+    model_name: str,
+    api_key: str,
+) -> str:
+    """
+    Answer a user question about a YouTube video transcript.
+
+    Args:
+        video_url: YouTube video url, e.g. "https://www.youtube.com/watch?v=VIDEO_ID"
+        question: User question
+        model_name: OpenAI model name
+        api_key: OpenAI API key
+
+    Returns:
+        Answer to the user question
+    """
+    # Get title and transcript
+    yt_title, yt_transcript = YoutubeTranscript().download_from_url(
+        video_url=video_url, video_language=settings.DEFAULT_LANGUAGES
+    )
+    # Initialize DeepDive object and extract answer
+    deep_dive = DeepDive(
+        title=yt_title,
+        transcript=yt_transcript,
+        user_question=question,
+    )
+    return deep_dive.extract(model_name=model_name, api_key=api_key)
