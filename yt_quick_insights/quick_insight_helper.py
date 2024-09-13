@@ -1,12 +1,11 @@
 from yt_quick_insights import QuickInsights, YoutubeTranscript
-from yt_quick_insights.config import settings
 from yt_quick_insights.task import ExtractionMethods, available_extraction_methods
 
 
 def get_quick_insights(
     url: str,
     task_details: ExtractionMethods,
-    video_language: str,
+    video_language: str | list[str],
 ) -> QuickInsights:
     """
     Retrieve YouTube transcript and title to initialize QuickInsights object
@@ -14,14 +13,11 @@ def get_quick_insights(
     Args:
         url: YouTube video url, e.g. "https://www.youtube.com/watch?v=VIDEO_ID"
         task_details: How to summarize or extract knowledge from th YouTube transcript.
-        video_language: The language of the video. If None, will try: en, de, es, fr
+        video_language: The language of the video.
 
     Returns:
         QuickInsights object
     """
-    if video_language is None:
-        video_language = settings.DEFAULT_LANGUAGES
-
     # Get title and transcript
     yt_title, yt_transcript = YoutubeTranscript().download_from_url(
         video_url=url, video_language=video_language
