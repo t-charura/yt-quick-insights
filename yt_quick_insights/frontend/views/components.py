@@ -14,7 +14,7 @@ def format_dropdown_label(item):
 
 def user_input_form(playlist: bool = False):
 
-    with st.form("user_input_form"):
+    with st.form("playlist_user_input_form" if playlist else "user_input_form"):
 
         url_label = "Playlist URL" if playlist else "YouTube Video URL"
         url = st.text_input(url_label)
@@ -23,11 +23,6 @@ def user_input_form(playlist: bool = False):
             additional_instructions = st.text_area(
                 "Additional Instructions (optional)",
             )
-
-            if not additional_instructions:
-                additional_instructions = (
-                    "No additional instructions, focus on the instructions above"
-                )
         else:
             additional_instructions = ""
 
@@ -45,7 +40,7 @@ def user_input_form(playlist: bool = False):
 
         col1, col2 = st.columns(2)
 
-        api_key = col2.text_input("OpenAI API Key")
+        api_key = col2.text_input("OpenAI API Key", type="password")
         model_name = col1.text_input("OpenAI Model", settings.OPENAI_MODEL_NAME)
 
         submit = st.form_submit_button("Get Insights")
@@ -78,16 +73,17 @@ def display_openai_errors(error_message, model_name):
         st.error(
             """
             ##### Invalid API key provided!
-            - You can find your API key at: https://platform.openai.com/account/api-keys.
-            - Check the "Usage Guide" above to learn how to set your API key.
+            - Make sure your API key is valid.
+            - Generate a new API key at: https://platform.openai.com/account/api-keys.
+            - Check the "Usage Guide" above to learn how to set your API key correctly.
             """
         )
     elif "Invalid model name" in str(error_message):
         st.error(
             f"""
-            ##### Invalid model name provided!
+            ##### Invalid OpenAI model name provided!
             - The model "{model_name}" does not exist or you do not have access to it.
             - You can find all available models at: https://platform.openai.com/docs/models.
-            - Check [Default Values](/env_file) if you want to change the default model.
+            - Learn how to change the default value for OpenAI Model, click [here](/env_file).
             """
         )
