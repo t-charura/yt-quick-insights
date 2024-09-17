@@ -2,8 +2,9 @@
   <img src="docs/images/banner.png"  alt="project-banner">
 </p>
 
-*YouTube Quick Insights is a CLI tool designed to extract meaningful insights from YouTube videos without watching them.
-Download the YouTube transcript, integrate it into a ready-to-use prompt, and use it with your favorite LLM.*
+*YouTube Quick Insights is a Python webapp designed to help users rapidly extract insights from YouTube content. 
+This application enables you to summarize videos, extract key information, 
+and analyze entire playlists without spending hours watching them.*
 
 <p align="center">
 	<img src="https://img.shields.io/github/license/t-charura/yt-quick-insights?style=default&logo=opensourceinitiative&logoColor=white&color=5bb8fc" alt="license">
@@ -26,24 +27,39 @@ Download the YouTube transcript, integrate it into a ready-to-use prompt, and us
 
 ---
 
----
 
 ## About the Project
 
 ### Key Features
 
-* **Prompt Generation:** Generate and download ready-to-use prompts as txt files to help you gain insights from YouTube
-  video content.
-* **Prompt Customization:** Tailor prompts to fit various needs such as basic summaries, extracting action steps,
-  summarizing podcasts, or extracting resources.
+- **🎥 Video Insights**: Extract relevant information from individual YouTube videos using various extraction methods.
+- **❓ Question-Based Insights**: Ask specific questions about a video to get targeted information.
+- **📚 Playlist Analysis**: Analyze each video in a playlist and generate a comprehensive summary of the playlist's content.
+- **🔧 Flexible Extraction Methods**: Choose from pre-defined extraction methods or create custom ones to suit your needs.
 
 ### Why it's valuable?
 
-* **Save Time:** Obtain critical information from videos without spending time watching them.
-* **Flexibility:** Customize the prompt generation process according to your needs, ensuring that you get the insights
-  that matter most to you.
-* **Ease of Use & Cost-Free:** CLI is easy to use and doesn't require an OpenAI API key, making it completely free with
-  no additional costs.
+- **⏱️ Time-Saving**: Obtain critical information from videos without spending hours watching them.
+- **🎛️ Customizable Analysis**: Tailor the extraction process to focus on specific aspects of the content.
+- **📈 Scalable**: Effortlessly analyze individual videos or entire playlists.
+- **🧠 Enhanced Learning & Retention**: Use generated summaries for personal notes to review content later, improving long-term retention.
+- **🖱️ Ease of Use**: Simple and user-friendly web interface.
+
+### Build with
+<p>
+  <img src="docs/images/python.png" width="30" alt="python-logo" align="top">
+  <a href="https://www.python.org/">Python</a>
+</p>
+
+<p>
+  <img src="docs/images/langchain.png" width="30" alt="langchain-logo" align="top">
+  <a href="https://github.com/langchain-ai/langchain">LangChain</a>
+</p>
+
+<p>
+  <img src="docs/images/streamlit.png" width="33" alt="streamlit-logo" align="top">
+  <a href="https://github.com/streamlit/streamlit">Streamlit</a>
+</p>
 
 ## Installation
 
@@ -53,87 +69,57 @@ tool.
 
 **Using pip**
 
-``` bash
+```bash
 pip install yt-quick-insights
 ```
 
 **Using poetry**
 
-``` bash
+```bash
 poetry add yt-quick-insights
 ```
 
-To verify that everything works and to see all available commands
+To verify that everything works
 
-``` bash
+```bash
 insights --help
 ```
 
 ## Usage
 
-Download the prompt in txt format in your current working directory.
+Start the app with the following command in your terminal:
 
-``` bash
-insights download https://www.youtube.com/watch?v=VIDEO_ID
+```bash
+insights run
 ```
 
-Customize the prompt to your needs with different tasks by using the `-t` flag.
+The webapp should open automatically in your default browser. If not, navigate to:
+`http://localhost:8502`.
 
-To see all available tasks run: `insights available-tasks`
-
-Additional you can add background information for the video by using the `-b` flag. Example:
-
-``` bash
-insights download https://www.youtube.com/watch?v=VIDEO_ID -t podcast_summary -b "In this podcast episode 4 guests and a moderator talk about the future of AI."
-```
-
-### Configure your own task
-
-Create a yaml file in your home directory under `~/.insights/task_details.yml`.
-
-``` yaml
-custom: |
-  Create your own custom task here.
-  You can use multiple lines to describe your task.
-  
-default: |
-  If you add a task name 
-  that already exists in the default tasks, 
-  it will be overwritten.
-```
-
-Not sure where to create the yaml file in your system?
-
-``` bash
-insights yaml-location
-```
-
-You can use your custom task by running the download command with the `-t` option
-
-``` bash
-insights download https://www.youtube.com/watch?v=VIDEO_ID -t custom
-```
-
-To see all currently available tasks
-
-``` bash
-insights available-tasks
-```
+For detailed usage instructions, please refer to the available in-app **Usage Guide**.
 
 ## Limitations
 
-* **Transcript Quality:** YouTube's auto-generated transcripts can contain errors.
-* **AI Imperfections:** LLMs are not perfect
-* **Technical Requirements:** Basic command-line knowledge is needed.
+- Relies on the availability and accuracy of video transcripts.
+- Requires an OpenAI API key for operation.
+- May not capture visual information or context that isn't described in the audio.
+- Only OpenAI LLMs are supported at this time.
 
 ## Roadmap
 
-* [x] Publish on PyPI
-* [ ] Add option to summarize the transcript directly insight the CLI using an LLM.
-* [ ] Create a web-based interface for non-technical users.
+- [x] Publish on PyPI
+- [x] Transform the CLI into a web app
+- [ ] Deploy the web app (Simplify user experience: no need to install locally)
+- [ ] Implement parallelization for extracting insights from YouTube Playlists
 
 ## Contact
 
-* **Website:** https://charura.com
-* **Email:** tendai@charura.com
-* **Github:** [t-charura](https://github.com/t-charura)
+- **🌐 Website:** [https://charura.com](https://charura.com)
+- **📧 Email:** tendai@charura.com
+- **👨‍💻 GitHub:** [@t-charura](https://github.com/t-charura)
+
+---
+
+<p align="center">
+  If you find YouTube Quick Insights helpful, please consider giving it a ⭐️ on GitHub!
+</p>
