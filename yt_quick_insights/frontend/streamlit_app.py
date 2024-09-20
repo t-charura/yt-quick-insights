@@ -1,6 +1,7 @@
 import streamlit as st
 
 from yt_quick_insights.config import settings
+from yt_quick_insights.frontend import components
 
 # Page Setup
 video_insights = st.Page(
@@ -34,11 +35,14 @@ default_values_with_env = st.Page(
     icon=":material/text_snippet:",
 )
 
-
+# Page Configuration
 st.set_page_config(
     layout="wide",
     menu_items={"About": "https://github.com/t-charura/yt-quick-insights"},
 )
+
+# Load CSS before running the app
+components.load_css("static/styles.css")
 
 # Navigation
 pg = st.navigation(

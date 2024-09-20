@@ -119,3 +119,8 @@ def show_cost_and_token_usage(cb: OpenAICallbackHandler):
         - **{cent_cost}**
         """
     )
+
+
+def load_css(file_path):
+    with open(file_path) as f:
+        st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
