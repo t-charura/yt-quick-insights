@@ -35,7 +35,6 @@ class QuickInsights:
         """
         self.title = title
         self.transcript = transcript
-        self.est_transcript_tokens = self._estimate_tokens()
         self.task = task
         self.prompt_template = self._load_prompt_template()
 
@@ -54,16 +53,6 @@ class QuickInsights:
                 "youtube_transcript",
             ],
         )
-
-    def _estimate_tokens(self) -> int:
-        """
-        Estimate the number of tokens in the transcript. Assumes 1 token = 4 characters
-
-        Returns:
-            Estimated number of tokens
-        """
-        char_count = len(self.transcript)
-        return char_count // 4
 
     def _invoke(
         self, obj_to_invoke: Union[RunnableSerializable, PromptTemplate]

@@ -1,5 +1,3 @@
-from typing import Tuple
-
 import streamlit as st
 
 from yt_quick_insights import (
@@ -18,9 +16,9 @@ def extract_insights(
     task: ExtractionMethods,
     model_name: str,
     api_key: str,
-) -> Tuple[str, int]:
+) -> str:
     """
-    Extract insights from YouTube transcript. Returns the summary and number of tokens.
+    Extract insights from YouTube transcript
 
     Args:
         video_url: YouTube video url, e.g. "https://www.youtube.com/watch?v=VIDEO_ID"
@@ -29,20 +27,16 @@ def extract_insights(
         api_key: OpenAI API key
 
     Returns:
-        The summary of the transcript and the number of tokens
+        The summary of the transcript
     """
     quick_insights = get_quick_insights(
         url=video_url,
         task_details=task,
         video_language=settings.DEFAULT_LANGUAGES,
     )
-
-    return (
-        quick_insights.extract(
-            model_name=model_name,
-            api_key=api_key,
-        ),
-        quick_insights.est_transcript_tokens,
+    return quick_insights.extract(
+        model_name=model_name,
+        api_key=api_key,
     )
 
 

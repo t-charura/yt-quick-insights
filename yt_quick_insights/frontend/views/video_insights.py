@@ -63,13 +63,11 @@ def process_user_inputs():
 
         try:
             with get_openai_callback() as cb:
-                st.session_state.video_insights, transcript_tokens = (
-                    caching.extract_insights(
-                        video_url=video_url,
-                        task=extraction_method,
-                        model_name=model_name,
-                        api_key=api_key,
-                    )
+                st.session_state.video_insights = caching.extract_insights(
+                    video_url=video_url,
+                    task=extraction_method,
+                    model_name=model_name,
+                    api_key=api_key,
                 )
             if not hide_openai_info:
                 components.show_cost_and_token_usage(cb)
