@@ -1,5 +1,6 @@
 import streamlit as st
 import typer
+from langchain_community.callbacks import get_openai_callback
 
 from yt_quick_insights.config import settings
 from yt_quick_insights.frontend import caching
@@ -32,17 +33,15 @@ def display_title_and_description():
 def display_usage_guide():
     with st.expander(":material/help:  Usage Guide"):
         st.markdown(
-            """
-            1. **YouTube Video URL**: Paste the YouTube video URL in the designated field (required).
-            2. **Extraction Method**: Select an appropriate method based on the video content. When in doubt, 
-               use the `General Summary` method. 
-               For detailed information on available methods, click [here](/extraction_methods).
-            3. **OpenAI Model**: Choose your preferred model (default: `gpt-4o-mini`).
-               View all available models [here](https://platform.openai.com/docs/models).
+            f"""
+            1. {components.video_url_info} 
+            2. {components.extraction_method_info}
+            3. {components.model_info}
             4. **OpenAI API Key**: Provide your API key in one of the following ways:
                - Enter it directly in the provided field.
                - Set it in the `.env` file (recommended). Learn more [here](/env_file).
                - Store the key in an environment variable called: `OPENAI_API_KEY`.
+            5. {components.hideo_openai_info}
             """,
             unsafe_allow_html=True,
         )
@@ -50,7 +49,7 @@ def display_usage_guide():
 
 def process_user_inputs():
     # Get Input Form
-    video_url, _, extraction_method, api_key, model_name, submit = (
+    video_url, _, extraction_method, api_key, model_name, submit, hide_openai_info = (
         components.user_input_form()
     )
 
@@ -63,15 +62,17 @@ def process_user_inputs():
             model_name = settings.OPENAI_MODEL_NAME
 
         try:
-            st.session_state.video_insights, transcript_tokens = (
-                caching.extract_insights(
-                    video_url=video_url,
-                    task=extraction_method,
-                    model_name=model_name,
-                    api_key=api_key,
+            with get_openai_callback() as cb:
+                st.session_state.video_insights, transcript_tokens = (
+                    caching.extract_insights(
+                        video_url=video_url,
+                        task=extraction_method,
+                        model_name=model_name,
+                        api_key=api_key,
+                    )
                 )
-            )
-            components.display_tokens_warning(transcript_tokens)
+            if not hide_openai_info:
+                components.show_cost_and_token_usage(cb)
             st.session_state.url = video_url
             st.session_state.submitted = True
         except ValueError:

@@ -2,6 +2,7 @@ from urllib.error import HTTPError
 
 import streamlit as st
 import typer
+from langchain_community.callbacks import get_openai_callback
 
 from yt_quick_insights.config import settings
 from yt_quick_insights.frontend import caching
@@ -26,20 +27,18 @@ def display_title_and_description():
 def display_help():
     with st.expander(":material/help:  Usage Guide"):
         st.markdown(
-            """
+            f"""
             1. **Playlist URL**: Paste the YouTube playlist URL in the designated field (required).
             2. **Additional Instructions**: Additional instructions for summarizing the playlist (optional).
                 - Example: Playlist with 10 videos about "Productivity"
                 - Additional Instructions: "What is the best way to do Goal Setting?"
-            3. **Extraction Method**: Select an appropriate method based on the video content. When in doubt, 
-               use the `General Summary` method. 
-               For detailed information on available methods, click [here](/extraction_methods).
-            4. **OpenAI Model**: Choose your preferred model (default: `gpt-4o-mini`).
-               View all available models [here](https://platform.openai.com/docs/models).
+            3. {components.extraction_method_info} 
+            4. {components.model_info}
             5. **OpenAI API Key**: Provide your API key in one of the following ways:
                - Enter it directly in the provided field.
                - Set it in the `.env` file (recommended). Learn more [here](/env_file).
                - Store the key in an environment variable called: `OPENAI_API_KEY`.
+            6. {components.hideo_openai_info}
             """,
             unsafe_allow_html=True,
         )
@@ -54,6 +53,7 @@ def process_user_inputs():
         api_key,
         model_name,
         submit,
+        hide_openai_info,
     ) = components.user_input_form(playlist=True)
 
     # Extract insights and set session states
@@ -70,13 +70,16 @@ def process_user_inputs():
             )
 
         try:
-            st.session_state.playlist_insights = caching.extract_playlist_insights(
-                playlist_url=playlist_url,
-                additional_instructions=additional_instructions,
-                extraction_method=extraction_method,
-                model_name=model_name,
-                api_key=api_key,
-            )
+            with get_openai_callback() as cb:
+                st.session_state.playlist_insights = caching.extract_playlist_insights(
+                    playlist_url=playlist_url,
+                    additional_instructions=additional_instructions,
+                    extraction_method=extraction_method,
+                    model_name=model_name,
+                    api_key=api_key,
+                )
+            if not hide_openai_info:
+                components.show_cost_and_token_usage(cb)
             st.session_state.submitted_playlist = True
         except (HTTPError, KeyError):
             st.error(

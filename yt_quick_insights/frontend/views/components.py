@@ -1,10 +1,31 @@
 import streamlit as st
+from langchain_community.callbacks import OpenAICallbackHandler
 
 from yt_quick_insights.config import settings
 from yt_quick_insights.task import ExtractionMethods
 
+# Constants
 default_task = ExtractionMethods.general_summary
 default_index = list(ExtractionMethods).index(default_task)
+
+# Usage Guide Information
+video_url_info = "**YouTube Video URL**: Paste the YouTube video URL in the designated field (required)."
+extraction_method_info = (
+    "**Extraction Method**: Select an appropriate method based on the video content. When in doubt,"
+    "use the `General Summary` method."
+    "For detailed information on available methods, click [here](/extraction_methods)."
+)
+model_info = (
+    "**OpenAI Model**: Choose your preferred model (default: `gpt-4o-mini`)."
+    "View all available models [here](https://platform.openai.com/docs/models)."
+)
+hideo_openai_info = (
+    "**Hide Cost & Token Usage**: Check this box to hide the information about cost "
+    "and token usage per insight."
+)
+
+
+# Functions
 
 
 def format_dropdown_label(item):
@@ -43,7 +64,8 @@ def user_input_form(playlist: bool = False):
         api_key = col2.text_input("OpenAI API Key", type="password")
         model_name = col1.text_input("OpenAI Model", settings.OPENAI_MODEL_NAME)
 
-        submit = st.form_submit_button("Get Insights")
+        submit = col1.form_submit_button("Get Insights")
+        hide_openai_info = col2.toggle("Hide Cost & Token Usage", value=False)
 
         return (
             url,
@@ -52,19 +74,7 @@ def user_input_form(playlist: bool = False):
             api_key,
             model_name,
             submit,
-        )
-
-
-def display_tokens_warning(transcript_tokens):
-    if transcript_tokens > 50_000:
-        st.warning(
-            f"Estimated tokens in YouTube Transcript: {transcript_tokens}",
-            icon=":material/warning:",
-        )
-    elif transcript_tokens > 20_000:
-        st.info(
-            f"Estimated tokens in YouTube Transcript: {transcript_tokens}",
-            icon=":material/info:",
+            hide_openai_info,
         )
 
 
@@ -87,3 +97,25 @@ def display_openai_errors(error_message, model_name):
             - Learn how to change the default value for OpenAI Model, click [here](/env_file).
             """
         )
+
+
+def show_cost_and_token_usage(cb: OpenAICallbackHandler):
+    col1, col2 = st.columns(2)
+
+    dollar_cost = f"${cb.total_cost:.4f}"
+    cent_cost = f"{cb.total_cost * 100:.2f}¢"
+
+    col1.info(
+        f"""
+        :material/insert_text: Token Usage ({cb.successful_requests} request):
+        - Input Tokens: **{cb.prompt_tokens}**
+        - Output Tokens: **{cb.completion_tokens}**
+        """
+    )
+    col2.warning(
+        f"""
+        :material/credit_card: Cost for this summary:
+        - **{dollar_cost}**
+        - **{cent_cost}**
+        """
+    )
