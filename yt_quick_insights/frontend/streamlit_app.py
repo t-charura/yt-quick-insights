@@ -42,7 +42,7 @@ st.set_page_config(
 )
 
 # Load CSS before running the app
-components.load_css("static/styles.css")
+components.load_css(settings.STYLES_CSS)
 
 # Navigation
 pg = st.navigation(

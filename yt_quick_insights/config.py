@@ -17,6 +17,7 @@ class Settings(BaseSettings):
 
     # Application Entry Point
     STREAMLIT_APP: Path = PROJECT_DIR / "frontend" / "streamlit_app.py"
+    STYLES_CSS: Path = PROJECT_DIR / "frontend" / "static" / "styles.css"
 
     MAX_TOKENS: int = 25_000
 
