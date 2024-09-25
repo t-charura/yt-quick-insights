@@ -20,6 +20,7 @@ and analyze entire playlists without spending hours watching them.*
   <a href='#installation'>Installation</a> •
   <a href='#usage'>Usage</a> •
   <a href='#limitations'>Limitations</a> •
+  <a href='#known-issues'>Known Issues</a> •
   <a href='#roadmap'>Roadmap</a> •
   <a href='#contact'>Contact</a>
 </p>
@@ -87,7 +88,7 @@ insights --help
 
 ## Usage
 
-Start the app with the following command in your terminal:
+To launch the application, open your terminal and run the following command:
 
 ```bash
 insights run
@@ -96,7 +97,20 @@ insights run
 The webapp should open automatically in your default browser. If not, navigate to:
 `http://localhost:8502`.
 
-For detailed usage instructions, please refer to the available in-app **Usage Guide**.
+<img src="docs/images/app_screenshot.jpg" alt="app_screenshot" width="75%">
+
+1. **Enter YouTube URL:** Paste the URL of the YouTube video you want to summarize in the designated field.
+2. **Set OpenAI API Key:** You have three options to provide your OpenAI API key:
+   - Enter it directly in the designated field
+   - Set it in the `.env` file 
+   - Store the key in an environment variable called: `OPENAI_API_KEY`
+3. **Generate Insights:** Click on the "Get Insights" button to start summarizing the video content.
+
+**(Optional Settings)**
+1. **Select Extraction Method:** Choose a specific method for extracting information based on the video content, defaults to `General Summary`.
+2. **Choose OpenAI Model:** Select any available OpenAI model for generating insights, defaults to `gpt-4o-mini`.
+
+For detailed usage instructions, please refer to the in-app Usage Guide. To set up a `.env` file or create a custom Extraction Method, navigate to the "Configuration" section in the app's navigation bar.
 
 ## Limitations
 
@@ -104,6 +118,10 @@ For detailed usage instructions, please refer to the available in-app **Usage Gu
 - Requires an OpenAI API key for operation.
 - May not capture visual information or context that isn't described in the audio.
 - Only OpenAI LLMs are supported at this time.
+
+## Known Issues
+* The YouTube transcript download feature does not work when using a VPN (tested with NordVPN). 
+  * For more details, refer to this [issue thread](https://github.com/jdepoix/youtube-transcript-api/issues/303).
 
 ## Roadmap
 
