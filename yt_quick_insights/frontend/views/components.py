@@ -11,12 +11,12 @@ default_index = list(ExtractionMethods).index(default_task)
 # Usage Guide Information
 video_url_info = "**YouTube Video URL**: Paste the YouTube video URL in the designated field (required)."
 extraction_method_info = (
-    "**Extraction Method**: Select an appropriate method based on the video content. When in doubt,"
-    "use the `General Summary` method."
+    "**Extraction Method**: Select an appropriate method based on the video content. When in doubt, "
+    "use the `General Summary` method. "
     "For detailed information on available methods, click [here](/extraction_methods)."
 )
 model_info = (
-    "**OpenAI Model**: Choose your preferred model (default: `gpt-4o-mini`)."
+    "**OpenAI Model**: Choose your preferred model (default: `gpt-4o-mini`). "
     "View all available models [here](https://platform.openai.com/docs/models)."
 )
 hideo_openai_info = (
