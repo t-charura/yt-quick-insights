@@ -31,7 +31,7 @@ def display_title_and_description():
 
 
 def display_usage_guide():
-    with st.expander(":material/help:  Usage Guide"):
+    with st.expander(":material/help:  Usage Guide: Video Insights"):
         st.markdown(
             f"""
             1. {components.video_url_info} 

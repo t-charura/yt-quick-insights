@@ -8,11 +8,11 @@ from yt_quick_insights.frontend.views import components
 
 
 def display_usage_guide():
-    with st.expander(":material/help: Usage Guide"):
+    with st.expander(":material/help: Usage Guide: Deep Dive"):
         st.markdown(
             f"""
             1. {components.video_url_info}
-            2. **Question**: Ask a question about the video.
+            2. **Question**: Ask detailed questions about the video to learn specific insights. 
             3. {components.model_info}
             4. **OpenAI API Key**: Provide your API key in one of the following ways:
                - Enter it directly in the provided field.

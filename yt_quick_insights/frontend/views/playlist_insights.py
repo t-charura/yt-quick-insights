@@ -25,7 +25,7 @@ def display_title_and_description():
 
 
 def display_help():
-    with st.expander(":material/help:  Usage Guide"):
+    with st.expander(":material/help: Usage Guide: Playlist Insights"):
         st.markdown(
             f"""
             1. **Playlist URL**: Paste the YouTube playlist URL in the designated field (required).
