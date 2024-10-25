@@ -104,9 +104,9 @@ insights run
 ```
 
 The webapp should open automatically in your default browser. If not, navigate to:
-`http://localhost:8502`.
+`http://localhost:8501`.
 
-<img src="docs/images/app_screenshot.jpg" alt="app_screenshot" width="75%">
+<img src="https://github.com/user-attachments/assets/b02ea88c-09c6-477f-87dc-ff3d329674d8" alt="usage_gif" width="75%">
 
 1. **Enter YouTube URL:** Paste the URL of the YouTube video you want to summarize in the designated field.
 2. **Set OpenAI API Key:** You have three options to provide your OpenAI API key:
