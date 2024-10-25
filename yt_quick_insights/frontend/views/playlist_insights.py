@@ -97,15 +97,8 @@ def display_results():
         result_container.markdown(st.session_state.playlist_insights)
 
         if st.session_state.playlist_insights:
-            col1, col2 = st.columns(2)
-
-            file_format = col2.radio("File format", (".txt", ".md"))
-
-            col1.download_button(
-                label="DOWNLOAD",
-                data=st.session_state.playlist_insights,
-                file_name=f"youtube_insights.{file_format}",
-                mime="text/plain",
+            components.download_summary_btn(
+                st.session_state.playlist_insights, unique_key="playlist"
             )
 
 

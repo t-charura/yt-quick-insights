@@ -82,6 +82,11 @@ def display_results():
         result_container = st.container(border=True)
         result_container.markdown(st.session_state.deep_dive)
 
+        if st.session_state.deep_dive:
+            components.download_summary_btn(
+                st.session_state.deep_dive, unique_key="deep_dive"
+            )
+
 
 def render_deep_dive():
     display_usage_guide()

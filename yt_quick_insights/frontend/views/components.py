@@ -121,6 +121,20 @@ def show_cost_and_token_usage(cb: OpenAICallbackHandler):
     )
 
 
+def download_summary_btn(summary: str, unique_key: str):
+    col1, col2 = st.columns(2)
+
+    file_format = col2.radio("File format", (".txt", ".md"), key=f"radio_{unique_key}")
+
+    col1.download_button(
+        label="DOWNLOAD",
+        data=summary,
+        file_name=f"youtube_insights.{file_format}",
+        mime="text/plain",
+        key=f"btn_{unique_key}",
+    )
+
+
 def load_css(file_path):
     with open(file_path) as f:
         st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
