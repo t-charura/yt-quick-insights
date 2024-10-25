@@ -2,8 +2,8 @@
   <img src="docs/images/banner.png"  alt="project-banner">
 </p>
 
-*YouTube Quick Insights is a Python webapp designed to help users rapidly extract insights from YouTube content. 
-This application enables you to summarize videos, extract key information, 
+*YouTube Quick Insights is a Python webapp designed to help users rapidly extract insights from YouTube content.
+This application enables you to summarize videos, extract key information,
 and analyze entire playlists without spending hours watching them.*
 
 <p align="center">
@@ -28,25 +28,34 @@ and analyze entire playlists without spending hours watching them.*
 
 ---
 
-
 ## About the Project
+
+With the overwhelming volume of content on YouTube, finding relevant information can be time-consuming and inefficient.
+YouTube Quick Insights solves this by instantly summarizing videos, extracting key information, and analyzing entire
+playlists.
+This AI-powered app saves time and enhances knowledge retention, making learning from YouTube content easier and more
+effective.
 
 ### Key Features
 
 - **🎥 Video Insights**: Extract relevant information from individual YouTube videos using various extraction methods.
 - **❓ Question-Based Insights**: Ask specific questions about a video to get targeted information.
-- **📚 Playlist Analysis**: Analyze each video in a playlist and generate a comprehensive summary of the playlist's content.
-- **🔧 Flexible Extraction Methods**: Choose from pre-defined extraction methods or create custom ones to suit your needs.
+- **📚 Playlist Analysis**: Analyze each video in a playlist and generate a comprehensive summary of the playlist's
+  content.
+- **🔧 Flexible Extraction Methods**: Choose from pre-defined extraction methods or create custom ones to suit your
+  needs.
 
 ### Why it's valuable?
 
 - **⏱️ Time-Saving**: Obtain critical information from videos without spending hours watching them.
 - **🎛️ Customizable Analysis**: Tailor the extraction process to focus on specific aspects of the content.
 - **📈 Scalable**: Effortlessly analyze individual videos or entire playlists.
-- **🧠 Enhanced Learning & Retention**: Use generated summaries for personal notes to review content later, improving long-term retention.
+- **🧠 Enhanced Learning & Retention**: Use generated summaries for personal notes to review content later, improving
+  long-term retention.
 - **🖱️ Ease of Use**: Simple and user-friendly web interface.
 
 ### Build with
+
 <p>
   <img src="docs/images/python.png" width="30" alt="python-logo" align="top">
   <a href="https://www.python.org/">Python</a>
@@ -101,16 +110,19 @@ The webapp should open automatically in your default browser. If not, navigate t
 
 1. **Enter YouTube URL:** Paste the URL of the YouTube video you want to summarize in the designated field.
 2. **Set OpenAI API Key:** You have three options to provide your OpenAI API key:
-   - Enter it directly in the designated field
-   - Set it in the `.env` file 
-   - Store the key in an environment variable called: `OPENAI_API_KEY`
+    - Enter it directly in the designated field
+    - Set it in the `.env` file
+    - Store the key in an environment variable called: `OPENAI_API_KEY`
 3. **Generate Insights:** Click on the "Get Insights" button to start summarizing the video content.
 
 **(Optional Settings)**
-1. **Select Extraction Method:** Choose a specific method for extracting information based on the video content, defaults to `General Summary`.
+
+1. **Select Extraction Method:** Choose a specific method for extracting information based on the video content,
+   defaults to `General Summary`.
 2. **Choose OpenAI Model:** Select any available OpenAI model for generating insights, defaults to `gpt-4o-mini`.
 
-For detailed usage instructions, please refer to the in-app Usage Guide. To set up a `.env` file or create a custom Extraction Method, navigate to the "Configuration" section in the app's navigation bar.
+For detailed usage instructions, please refer to the in-app Usage Guide. To set up a `.env` file or create a custom
+Extraction Method, navigate to the "Configuration" section in the app's navigation bar.
 
 ## Limitations
 
@@ -120,8 +132,9 @@ For detailed usage instructions, please refer to the in-app Usage Guide. To set 
 - Only OpenAI LLMs are supported at this time.
 
 ## Known Issues
-* The YouTube transcript download feature does not work when using a VPN (tested with NordVPN). 
-  * For more details, refer to this [issue thread](https://github.com/jdepoix/youtube-transcript-api/issues/303).
+
+* The YouTube transcript download feature does not work when using a VPN (tested with NordVPN).
+    * For more details, refer to this [issue thread](https://github.com/jdepoix/youtube-transcript-api/issues/303).
 
 ## Roadmap
 
