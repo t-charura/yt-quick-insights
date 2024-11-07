@@ -14,6 +14,9 @@ youtube-transcript-api = "^0.6.2"
 pytube = "^15.0.0"
 typer = "^0.12.3"
 rich = "^13.7.1"
+langchain-openai = "^0.1.22"
+pydantic-settings = "^2.4.0"
+streamlit = "^1.38.0"
 
 [tool.poetry.group.dev.dependencies]
 black = "^24.8.0"

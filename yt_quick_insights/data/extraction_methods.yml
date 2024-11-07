@@ -1,0 +1,86 @@
+how_to_summary: |
+  Identify the main goal or task being taught in the video and 
+  all the corresponding action steps, recommendations, and tips.
+  1. List each action or recommendation as a separate bullet point, provide:
+      - A clear, concise description of the action or recommendation and why it is important.
+      - Any specific tools, materials, or resources if mentioned.
+      - Important tips or tricks if mentioned
+      - Potential pitfalls or common mistakes to avoid if mentioned
+  2. Organize the points logically, grouping related items if applicable.
+  3. Avoid repetition and focus on unique, valuable information.
+
+general_summary: |
+  Summarize the key aspects of the video transcript:
+  1. Highlight the most important points using structured bullet points, by focusing on:
+      - Valuable and unique information 
+      - Any calls to action, tips, or recommendations.
+      - Significant conclusions or takeaways
+  2. Avoid repetition and focus on unique, valuable information.
+  3. If applicable, list any resources, tools, or references mentioned in the video.
+
+knowledge_extraction: |
+  - Identify the main topic or concept being explained in the video.
+  - List the key ideas, theories, or facts presented.
+  - For each main point:
+  - Provide a clear explanation
+  - Include any supporting evidence or examples given
+  - Note any historical context or background information, if applicable
+  - Highlight any definitions of important terms or concepts.
+  - Summarize any debates or differing perspectives presented on the topic.
+  - Include any real-world applications or implications discussed.
+  - Note any areas of ongoing research or unanswered questions mentioned.
+  - Conclude with the significance of this knowledge or how it fits into a broader context.
+
+extensive_summary: |
+  - Provide a detailed, comprehensive summary of the entire video content.
+  - Include an introduction that gives an overview of the video's main topic and purpose.
+  - Break down the content into clear sections or themes, maintaining the original structure of the video.
+  - For each section:
+      - Summarize all major points and supporting details
+      - Include relevant examples, anecdotes, or case studies mentioned
+      - Note any data, statistics, or research findings presented
+  - Note any calls to action, recommendations and tips. 
+  - Conclude with a recap of the main takeaways and their implications.
+
+
+short_summary: |
+  Provide a concise summary of the main aspects of the transcript:
+  1. Identify the 3-6 most crucial points discussed in the video.
+  2. For each point, write a clear, informative sentence that captures its essence.
+  3. Ensure the summary gives a balanced representation of the video's content.
+
+resource_extraction: |
+  Extract and organize all resources mentioned in the transcript:
+  1. Create a comprehensive list of all resources mentioned, including:
+      - Books, articles, research papers, or publications
+      - Websites, online tools, or digital platforms
+      - Software applications or programs
+      - Physical tools or equipment
+      - Courses, workshops, or training programs
+  2. For each resource, provide:
+      - Its name or title
+      - A brief description of its purpose or relevance to the video's topic
+      - Any specific recommendations or warnings given about the resource
+  3. If available, include:
+      - Authors, creators, or brands associated with the resource
+      - Where to find or access the resource (e.g., URLs, stores)
+      - Any costs or licensing information mentioned
+  4. Organize the resources into logical categories based on their type or purpose.
+  5. Highlight any resources that were particularly emphasized or recommended.
+
+podcast_summary: |
+  Summarize and extract knowledge from the transcript as if it were a podcast:
+  1. Provide an overview of the podcast episode, including:
+      - The main topic or theme
+      - Names and brief descriptions of the host(s) and guest(s), if mentioned
+  2. Outline the structure of the discussion, noting any distinct segments or topics.
+  3. For each main segment or topic:
+      - Summarize the key points discussed
+      - Highlight any unique insights, personal anecdotes, or expert opinions shared
+      - Note any disagreements or alternative viewpoints presented
+  4. Extract and list any:
+      - Practical advice or tips given
+      - Book recommendations, resources, or references mentioned
+  5. Note any calls to action or requests made to the listeners.
+  6. Conclude with:
+      - The main takeaways from the episode

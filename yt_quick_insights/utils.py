@@ -2,6 +2,9 @@ import re
 from pathlib import Path
 
 import yaml
+from langchain_openai import ChatOpenAI
+from rich.console import Console
+from rich.markdown import Markdown
 
 from yt_quick_insights.config import settings
 
@@ -44,15 +47,62 @@ def load_yaml_file(file_name: str, directory: Path) -> dict[str, str]:
         raise yaml.YAMLError(f"Error parsing YAML file {yaml_file}: {e}")
 
 
-def get_yaml_location() -> str:
+def initialize_llm(model_name: str, api_key: str) -> ChatOpenAI:
     """
-    Get the location of the yaml file where the user can define their task details.
+    Return an LLM instance
+
+    Args:
+        model_name: The name of the model to use
+        api_key: The API key to use
 
     Returns:
-        The location of the yaml file
+        LLM instance
+    """
+    return ChatOpenAI(
+        model_name=model_name,
+        api_key=api_key,
+        temperature=0,
+    )
+
+
+def save_to_file(file_name: str, content: str) -> None:
+    """
+    Save the given result to a file with the given file name.
+
+    Args:
+        file_name: The name of the file to save to.
+        content: The content to save to the file.
+    """
+    with open(file_name, "w", encoding="utf-8") as file:
+        file.write(content)
+
+
+def get_yaml_location() -> str:
+    """
+    Returns the location of the yaml file
     """
     return (
         "YouTube Quick Insights is looking for the yaml file at the following location:\n"
-        f'--> [green bold]{settings.HOME_DIR / ".insights" / "task_details.yaml"}[/green bold] <--\n\n'
-        f"Check https://github.com/t-charura/yt-quick-insights for an example yaml file."
+        f'--> [green bold]{settings.LOCAL_CONFIG_DIR / "extraction_methods.yaml"}[/green bold] <--'
     )
+
+
+def env_information() -> str:
+    """
+    Returns the location of the .env file
+    """
+    return (
+        "YouTube Quick Insights is looking for the .env file at the following location:\n"
+        f'--> [green bold]{settings.LOCAL_CONFIG_DIR / ".env"}[/green bold] <--'
+    )
+
+
+def show_markdown_output(output: str) -> None:
+    """
+    Show markdown output in the console.
+
+    Args
+        output: The markdown output
+    """
+    console = Console()
+    console.print(Markdown(output))
