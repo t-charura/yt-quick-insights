@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "yt-quick-insights"
-version = "0.1.0"
+version = "1.0.0"
 description = ""
 authors = ["Tendai <tendai.charura@gmail.com>"]
 license = "MIT"
