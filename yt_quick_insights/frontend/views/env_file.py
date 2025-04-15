@@ -21,7 +21,7 @@ with st.container(border=True):
     
         ``` properties
         OPENAI_API_KEY=YOUR_OPENAI_API_KEY
-        OPENAI_MODEL_NAME=gpt-4o-mini
+        OPENAI_MODEL_NAME=gpt-4.1-mini
         ```
     
         If you're unsure about the correct location for the `.env` file on your system, use the following command:

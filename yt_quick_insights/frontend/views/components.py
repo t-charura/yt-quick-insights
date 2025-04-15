@@ -16,7 +16,7 @@ extraction_method_info = (
     "For detailed information on available methods, click [here](/extraction_methods)."
 )
 model_info = (
-    "**OpenAI Model**: Choose your preferred model (default: `gpt-4o-mini`). "
+    "**OpenAI Model**: Choose your preferred model (default: `gpt-4.1-mini`). "
     "View all available models [here](https://platform.openai.com/docs/models)."
 )
 hideo_openai_info = (

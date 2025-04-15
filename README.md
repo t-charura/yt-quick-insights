@@ -119,7 +119,7 @@ The webapp should open automatically in your default browser. If not, navigate t
 
 1. **Select Extraction Method:** Choose a specific method for extracting information based on the video content,
    defaults to `General Summary`.
-2. **Choose OpenAI Model:** Select any available OpenAI model for generating insights, defaults to `gpt-4o-mini`.
+2. **Choose OpenAI Model:** Select any available OpenAI model for generating insights, defaults to `gpt-4.1-mini`.
 
 For detailed usage instructions, please refer to the in-app Usage Guide. To set up a `.env` file or create a custom
 Extraction Method, navigate to the "Configuration" section in the app's navigation bar.
