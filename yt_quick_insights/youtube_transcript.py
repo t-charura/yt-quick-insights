@@ -1,5 +1,6 @@
 import re
 from typing import Tuple
+from urllib.error import HTTPError
 
 from langchain_community.document_loaders import YoutubeLoader
 from langchain_core.documents import Document
@@ -36,7 +37,7 @@ class YoutubeTranscript:
                 video_language=video_language,
                 add_video_info=True,
             )
-        except PytubeError:
+        except (PytubeError, HTTPError) as e:
             # Common error, when YouTube makes changes to their API structure and "pytube" has not yet adjusted
             # pytube is used by langchain's YoutubeLoader to fetch video details
             yt_document = self._load(
