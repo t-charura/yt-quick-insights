@@ -35,6 +35,7 @@ YouTube Quick Insights solves this by instantly summarizing videos, extracting k
 playlists.
 This AI-powered app saves time and enhances knowledge retention, making learning from YouTube content easier and more
 effective.
+You can also read more about this project in my [Medium blog post](https://medium.com/@tendai.charura/instant-youtube-insights-skip-the-viewing-keep-the-learning-f42404729e58).
 
 ### Key Features
 
