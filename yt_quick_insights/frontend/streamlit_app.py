@@ -53,7 +53,10 @@ pg = st.navigation(
     }
 )
 
-st.logo(str(settings.PROJECT_DIR / ".." / "docs" / "images" / "logo.png"))
+try:
+    st.logo(str(settings.PROJECT_DIR / "frontend" / "static" / "logo.png"))
+except:
+    pass
 
 st.sidebar.markdown(
     ":material/build_circle: Created by [Tendai](https://github.com/t-charura)"
