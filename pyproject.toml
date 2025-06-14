@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "yt-quick-insights"
-version = "1.0.1"
+version = "1.0.2"
 description = ""
 authors = ["Tendai <tendai.charura@gmail.com>"]
 license = "MIT"
@@ -8,13 +8,13 @@ readme = "README.md"
 homepage = 'https://github.com/t-charura/yt-quick-insights'
 
 [tool.poetry.dependencies]
-python = "^3.11"
-langchain-community = "^0.2.12"
-youtube-transcript-api = "^0.6.2"
+python = ">=3.11,<3.14"
+langchain-community = "^0.3.0"
+youtube-transcript-api = "1.1.0"
 pytube = "^15.0.0"
-typer = "^0.12.3"
+typer = "^0.15.0"
 rich = "^13.7.1"
-langchain-openai = "^0.1.22"
+langchain-openai = "^0.3.0"
 pydantic-settings = "^2.4.0"
 streamlit = "^1.38.0"
 
