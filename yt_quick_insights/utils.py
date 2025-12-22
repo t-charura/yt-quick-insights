@@ -3,6 +3,7 @@ from pathlib import Path
 
 import yaml
 from langchain_openai import ChatOpenAI
+from pydantic import SecretStr
 from rich.console import Console
 from rich.markdown import Markdown
 
@@ -58,9 +59,12 @@ def initialize_llm(model_name: str, api_key: str) -> ChatOpenAI:
     Returns:
         LLM instance
     """
+    if model_name.startswith("gpt-5"):
+        return ChatOpenAI(model=model_name, api_key=SecretStr(api_key))
+
     return ChatOpenAI(
-        model_name=model_name,
-        api_key=api_key,
+        model=model_name,
+        api_key=SecretStr(api_key),
         temperature=0,
     )
 
