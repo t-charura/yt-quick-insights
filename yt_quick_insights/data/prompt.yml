@@ -16,7 +16,9 @@ prompt: |
   *** Additional Instructions ***
   - Maintain the original meaning and intent of the content.
   - Use clear, concise language in your summary.
-  - Highlight any disclaimers or warnings mentioned.
+  - Do not mention or imply that the transcript was automatically generated.
+  - Exclude any promotional or call-to-action content (e.g., “like,” “subscribe,” external links, or newsletter sign-ups).
+
 
   *** YouTube Video Transcript ***
   {youtube_transcript}
