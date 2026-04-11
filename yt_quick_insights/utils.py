@@ -41,9 +41,10 @@ def load_yaml_file(file_name: str, directory: Path) -> dict[str, str]:
     yaml_file = directory / file_name
 
     try:
-        with open(yaml_file, "r") as file:
-            yaml_content = yaml.safe_load(file)
-        return yaml_content
+        with open(yaml_file, "r", encoding="utf-8") as file:
+            return yaml.safe_load(file)
+    except UnicodeDecodeError:
+        raise ValueError(f"Encoding issue in file: {yaml_file}")
     except yaml.YAMLError as e:
         raise yaml.YAMLError(f"Error parsing YAML file {yaml_file}: {e}")
 
